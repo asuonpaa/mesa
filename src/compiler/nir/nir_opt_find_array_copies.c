@@ -370,7 +370,7 @@ try_match_deref(nir_deref_path *base_path, int *path_array_idx,
              (const_b_idx && const_d_idx && b_idx == d_idx))
             continue;
 
-         return false;
+         COVPOINT_ASSERT("NirOptFindArrayCopies373"); return false;
 
       case nir_deref_type_array_wildcard:
          continue;
@@ -457,8 +457,8 @@ handle_write(nir_deref_instr *dst, nir_deref_instr *src,
                                        &src_path, dst_node->next_array_idx,
                                        *instr);
          nir_deref_path_finish(&src_path);
-         if (!result)
-            goto reset;
+         if (!result) {
+            COVPOINT_ASSERT("NirOptFindArrayCopies461"); goto reset; }
       }
 
       /* Check if an aliasing write clobbered the array after the last normal

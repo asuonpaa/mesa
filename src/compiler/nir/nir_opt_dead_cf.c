@@ -166,8 +166,8 @@ def_only_used_in_cf_node(nir_ssa_def *def, void *_node)
          nir_cf_node_as_block(nir_cf_node_prev(&use->parent_if->cf_node));
 
       if (use_block->index <= before->index ||
-          use_block->index >= after->index)
-         return false;
+          use_block->index >= after->index) {
+         COVPOINT_ASSERT("NirOptDeadCf170"); return false; }
    }
 
    return true;
