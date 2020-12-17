@@ -139,7 +139,7 @@ static void
 rewrite_compare_instruction(nir_builder *bld, nir_alu_instr *orig_cmp,
                             nir_alu_instr *orig_add, bool zero_on_left)
 {
-   void *const mem_ctx = ralloc_parent(orig_cmp);
+   COVPOINT_ASSERT("NirOptComparisonPre142"); void *const mem_ctx = ralloc_parent(orig_cmp);
 
    bld->cursor = nir_before_instr(&orig_cmp->instr);
 
@@ -254,8 +254,8 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
             u_vector_foreach(a, &b->instructions) {
                nir_alu_instr *const cmp = *a;
 
-               if (cmp == NULL)
-                  continue;
+               if (cmp == NULL) {
+                  COVPOINT_ASSERT("NirOptComparisonPre258"); continue; }
 
                /* The operands of both instructions are, with some liberty,
                 * commutative.  Check all four permutations.  The third and
@@ -270,7 +270,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
                    *
                    *    A cmp B <=> A + -B cmp 0
                    */
-                  rewrite_compare_instruction(bld, cmp, alu, false);
+                  COVPOINT_ASSERT("NirOptComparisonPre273"); rewrite_compare_instruction(bld, cmp, alu, false);
 
                   *a = NULL;
                   rewrote_compare = true;
@@ -284,7 +284,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
                    *
                    *    A cmp B <=> 0 cmp B + -A
                    */
-                  rewrite_compare_instruction(bld, cmp, alu, true);
+                  COVPOINT_ASSERT("NirOptComparisonPre287"); rewrite_compare_instruction(bld, cmp, alu, true);
 
                   *a = NULL;
                   rewrote_compare = true;
@@ -307,7 +307,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
              * care of by calling the optimization pass repeatedly.
              */
             if (rewrote_compare) {
-               progress = true;
+               COVPOINT_ASSERT("NirOptComparisonPre310"); progress = true;
                break;
             }
 
@@ -339,8 +339,8 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
    for (unsigned i = 0; i < block->num_dom_children; i++) {
       nir_block *child = block->dom_children[i];
 
-      if (comparison_pre_block(child, bq, bld))
-         progress = true;
+      if (comparison_pre_block(child, bq, bld)) {
+         COVPOINT_ASSERT("NirOptComparisonPre343"); progress = true; }
    }
 
    pop_block(bq, bi);
@@ -365,7 +365,7 @@ nir_opt_comparison_pre_impl(nir_function_impl *impl)
    block_queue_finish(&bq);
 
    if (progress) {
-      nir_metadata_preserve(impl, nir_metadata_block_index |
+      COVPOINT_ASSERT("NirOptComparisonPre368"); nir_metadata_preserve(impl, nir_metadata_block_index |
                                   nir_metadata_dominance);
    } else {
       nir_metadata_preserve(impl, nir_metadata_all);

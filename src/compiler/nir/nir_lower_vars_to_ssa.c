@@ -184,8 +184,8 @@ get_deref_node_recur(nir_deref_instr *deref,
           * out-of-bounds offset.  We need to handle this at least
           * somewhat gracefully.
           */
-         if (index >= glsl_get_length(parent->type))
-            return UNDEF_NODE;
+         if (index >= glsl_get_length(parent->type)) {
+            COVPOINT_ASSERT("NirLowerVarsToSSA118"); return UNDEF_NODE; }
 
          if (parent->children[index] == NULL) {
             parent->children[index] =
@@ -568,7 +568,7 @@ rename_variables(struct lower_variables_state *state)
                 * reading past the end of some array.  In any case, this
                 * should result in an undefined value.
                 */
-               nir_ssa_undef_instr *undef =
+               COVPOINT_ASSERT("NirLowerVarsToSSA571"); nir_ssa_undef_instr *undef =
                   nir_ssa_undef_instr_create(state->shader,
                                              intrin->num_components,
                                              intrin->dest.ssa.bit_size);
@@ -621,7 +621,7 @@ rename_variables(struct lower_variables_state *state)
             if (node == UNDEF_NODE) {
                /* Probably an out-of-bounds array store.  That should be a
                 * no-op. */
-               nir_instr_remove(&intrin->instr);
+               COVPOINT_ASSERT("NirLowerVarsToSSA624"); nir_instr_remove(&intrin->instr);
                continue;
             }
 
@@ -647,7 +647,7 @@ rename_variables(struct lower_variables_state *state)
                new_def = nir_swizzle(&b, value, swiz,
                                      intrin->num_components);
             } else {
-               nir_ssa_def *old_def =
+               COVPOINT_ASSERT("NirLowerVarsToSSA650"); nir_ssa_def *old_def =
                   nir_phi_builder_value_get_block_def(node->pb_value, block);
                /* For writemasked store_var intrinsics, we combine the newly
                 * written values with the existing contents of unwritten
