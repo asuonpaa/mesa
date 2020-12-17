@@ -18,6 +18,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+files_coverage = files('macros_coverage.cpp')
+libcoveragemacros = static_library(
+        'coveragemacros',
+        files_coverage,
+        c_args : [c_msvc_compat_args, no_override_init_args],
+        cpp_args : [cpp_msvc_compat_args],
+        gnu_symbol_visibility : 'hidden',
+        include_directories : [],
+        link_with : [],
+        dependencies : [],
+        build_by_default : false,
+        )
+
 inc_mesa = include_directories('mesa')
 inc_mapi = include_directories('mapi')
 inc_src = include_directories('.')

@@ -195,7 +195,7 @@ libvulkan_intel = shared_library(
   link_whole : [libanv_common, libanv_gen_libs],
   link_with : [
     libintel_compiler, libintel_dev, libisl, libblorp, libvulkan_wsi,
-    libintel_perf,
+    libintel_perf, libcoveragemacros
   ],
   dependencies : [
     dep_thread, dep_dl, dep_m, anv_deps, idep_libintel_common,
