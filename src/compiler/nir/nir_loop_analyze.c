@@ -569,7 +569,7 @@ try_find_limit_of_alu(nir_ssa_scalar limit, nir_const_value *limit_val,
 
    nir_op limit_op = nir_ssa_scalar_alu_op(limit);
    if (limit_op == nir_op_imin || limit_op == nir_op_fmin) {
-      for (unsigned i = 0; i < 2; i++) {
+      COVPOINT_ASSERT("NirLoopAnalyze572"); for (unsigned i = 0; i < 2; i++) {
          nir_ssa_scalar src = nir_ssa_scalar_chase_alu_src(limit, i);
          if (nir_ssa_scalar_is_const(src)) {
             *limit_val = nir_ssa_scalar_as_const_value(src);
@@ -803,8 +803,8 @@ calculate_iterations(nir_const_value initial, nir_const_value step,
    /* If iter_int is negative the loop is ill-formed or is the conditional is
     * unsigned with a huge iteration count so don't bother going any further.
     */
-   if (iter_int < 0)
-      return -1;
+   if (iter_int < 0) {
+      COVPOINT_ASSERT("NirLoopAnalyze807"); return -1; }
 
    /* An explanation from the GLSL unrolling pass:
     *
@@ -831,7 +831,7 @@ calculate_iterations(nir_const_value initial, nir_const_value step,
 static nir_op
 inverse_comparison(nir_op alu_op)
 {
-   switch (alu_op) {
+   COVPOINT_ASSERT("NirLoopAnalyze834"); switch (alu_op) {
    case nir_op_fge:
       return nir_op_flt;
    case nir_op_ige:
@@ -921,8 +921,8 @@ try_find_trip_count_vars_in_iand(nir_ssa_scalar *cond,
       }
 
       /* If the loop is not breaking on (x && y) == 0 then return */
-      if (nir_ssa_scalar_as_uint(zero) != 0)
-         return false;
+      if (nir_ssa_scalar_as_uint(zero) != 0) {
+         COVPOINT_ASSERT("NirLoopAnalyze925"); return false; }
    }
 
    if (!nir_ssa_scalar_is_alu(iand))
@@ -934,7 +934,7 @@ try_find_trip_count_vars_in_iand(nir_ssa_scalar *cond,
    /* Check if iand src is a terminator condition and try get induction var
     * and trip limit var.
     */
-   bool found_induction_var = false;
+   COVPOINT_ASSERT("NirLoopAnalyze937"); bool found_induction_var = false;
    for (unsigned i = 0; i < 2; i++) {
       nir_ssa_scalar src = nir_ssa_scalar_chase_alu_src(iand, i);
       if (is_supported_terminator_condition(src) &&
@@ -992,7 +992,7 @@ find_trip_count(loop_info_state *state, unsigned execution_mode)
           * inverse of x or y (i.e. which ever contained the induction var) in
           * order to compute the trip count.
           */
-         alu_op = inverse_comparison(nir_ssa_scalar_alu_op(cond));
+         COVPOINT_ASSERT("NirLoopAnalyze995"); alu_op = inverse_comparison(nir_ssa_scalar_alu_op(cond));
          trip_count_known = false;
          terminator->exact_trip_count_unknown = true;
       }

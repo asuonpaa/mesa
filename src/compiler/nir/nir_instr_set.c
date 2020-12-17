@@ -477,7 +477,7 @@ nir_alu_srcs_negative_equal(const nir_alu_instr *alu1,
             return false;
       }
 
-      return true;
+      COVPOINT_ASSERT("NirInstrSet480"); return true;
    }
 
    uint8_t alu1_swizzle[NIR_MAX_VEC_COMPONENTS] = {0};
@@ -516,8 +516,8 @@ nir_alu_srcs_negative_equal(const nir_alu_instr *alu1,
 
    for (unsigned i = 0; i < nir_ssa_alu_instr_src_components(alu1, src1); i++) {
       if (alu1_swizzle[alu1->src[src1].swizzle[i]] !=
-          alu2_swizzle[alu2->src[src2].swizzle[i]])
-         return false;
+          alu2_swizzle[alu2->src[src2].swizzle[i]]) {
+         COVPOINT_ASSERT("NirInstrSet520"); return false; }
    }
 
    return parity && nir_srcs_equal(alu1_actual_src, alu2_actual_src);
@@ -700,8 +700,8 @@ nir_instrs_equal(const nir_instr *instr1, const nir_instr *instr2)
       nir_phi_instr *phi1 = nir_instr_as_phi(instr1);
       nir_phi_instr *phi2 = nir_instr_as_phi(instr2);
 
-      if (phi1->instr.block != phi2->instr.block)
-         return false;
+      if (phi1->instr.block != phi2->instr.block) {
+         COVPOINT_ASSERT("NirInstrSet704"); return false; }
 
       nir_foreach_phi_src(src1, phi1) {
          nir_foreach_phi_src(src2, phi2) {
