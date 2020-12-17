@@ -822,7 +822,7 @@ reduce_cursor(nir_cursor cursor)
       nir_instr *prev_instr = nir_instr_prev(cursor.instr);
       if (prev_instr) {
          /* Before this instruction is after the previous */
-         cursor.instr = prev_instr;
+         COVPOINT_ASSERT("Nir825"); cursor.instr = prev_instr;
          cursor.option = nir_cursor_after_instr;
       } else {
          /* No previous instruction.  Switch to before block */
@@ -833,7 +833,7 @@ reduce_cursor(nir_cursor cursor)
    }
 
    case nir_cursor_after_instr:
-      if (nir_instr_next(cursor.instr) == NULL) {
+      COVPOINT_ASSERT("Nir836"); if (nir_instr_next(cursor.instr) == NULL) {
          /* This is the last instruction, switch to after block */
          cursor.option = nir_cursor_after_block;
          cursor.block = cursor.instr->block;
@@ -1148,7 +1148,7 @@ nir_instr_ssa_def(nir_instr *instr)
       return &nir_instr_as_deref(instr)->dest.ssa;
 
    case nir_instr_type_tex:
-      assert(nir_instr_as_tex(instr)->dest.is_ssa);
+      COVPOINT_ASSERT("Nir1151"); assert(nir_instr_as_tex(instr)->dest.is_ssa);
       return &nir_instr_as_tex(instr)->dest.ssa;
 
    case nir_instr_type_intrinsic: {
@@ -1237,8 +1237,8 @@ visit_intrinsic_src(nir_intrinsic_instr *instr, nir_foreach_src_cb cb,
 {
    unsigned num_srcs = nir_intrinsic_infos[instr->intrinsic].num_srcs;
    for (unsigned i = 0; i < num_srcs; i++) {
-      if (!visit_src(&instr->src[i], cb, state))
-         return false;
+      if (!visit_src(&instr->src[i], cb, state)) {
+         COVPOINT_ASSERT("Nir1241"); return false; }
    }
 
    return true;
@@ -1316,8 +1316,8 @@ nir_foreach_src(nir_instr *instr, nir_foreach_src_cb cb, void *state)
          return false;
       break;
    case nir_instr_type_intrinsic:
-      if (!visit_intrinsic_src(nir_instr_as_intrinsic(instr), cb, state))
-         return false;
+      if (!visit_intrinsic_src(nir_instr_as_intrinsic(instr), cb, state)) {
+         COVPOINT_ASSERT("1320"); return false; }
       break;
    case nir_instr_type_tex:
       if (!visit_tex_src(nir_instr_as_tex(instr), cb, state))
