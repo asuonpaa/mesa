@@ -51,7 +51,7 @@ var_info_cmp(const void *_a, const void *_b)
    uint32_t b_size = b->constant_data_size;
 
    if (a->is_constant != b->is_constant) {
-      return (int)a->is_constant - (int)b->is_constant;
+      COVPOINT_ASSERT("NirOptLargeConstants54"); return (int)a->is_constant - (int)b->is_constant;
    } else if (a_size < b_size) {
       return -1;
    } else if (a_size > b_size) {

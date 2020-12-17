@@ -227,7 +227,7 @@ get_complex_unroll_insert_location(nir_cf_node *node, bool continue_from_then)
    } else {
       nir_if *if_stmt = nir_cf_node_as_if(node);
       if (continue_from_then) {
-         return nir_after_block(nir_if_last_then_block(if_stmt));
+         COVPOINT_ASSERT("NirOptLoopUnroll230"); return nir_after_block(nir_if_last_then_block(if_stmt));
       } else {
          return nir_after_block(nir_if_last_else_block(if_stmt));
       }
@@ -466,7 +466,7 @@ complex_unroll(nir_loop *loop, nir_loop_terminator *unlimit_term,
 static void
 complex_unroll_single_terminator(nir_loop *loop)
 {
-   assert(list_length(&loop->info->loop_terminator_list) == 1);
+   COVPOINT_ASSERT("NirOptLoopUnroll469"); assert(list_length(&loop->info->loop_terminator_list) == 1);
    assert(loop->info->limiting_terminator);
    assert(nir_is_trivial_loop_if(loop->info->limiting_terminator->nif,
                                  loop->info->limiting_terminator->break_block));
@@ -530,8 +530,8 @@ wrapper_unroll(nir_loop *loop)
        * register pressure that comes from simply nesting the
        * terminators one after the other.
        */
-      if (list_length(&loop->info->loop_terminator_list) > 3)
-         return false;
+      if (list_length(&loop->info->loop_terminator_list) > 3) {
+         COVPOINT_ASSERT("NirOptLoopUnroll534"); return false; }
 
       loop_prepare_for_unroll(loop);
 
@@ -940,7 +940,7 @@ process_loops(nir_shader *sh, nir_cf_node *cf_node, bool *has_nested_loop_out,
          }
 
          if (num_lt == 1) {
-            assert(loop->info->limiting_terminator->exact_trip_count_unknown);
+            COVPOINT_ASSERT("NirOptLoopUnroll943"); assert(loop->info->limiting_terminator->exact_trip_count_unknown);
             complex_unroll_single_terminator(loop);
             progress = true;
          }

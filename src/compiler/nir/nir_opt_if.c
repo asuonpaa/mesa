@@ -164,8 +164,8 @@ opt_peel_loop_initial_if(nir_loop *loop)
       return false;
 
    nir_phi_instr *cond_phi = nir_instr_as_phi(cond->parent_instr);
-   if (cond->parent_instr->block != header_block)
-      return false;
+   if (cond->parent_instr->block != header_block) {
+      COVPOINT_ASSERT("NirOptIf168"); return false; }
 
    bool entry_val = false, continue_val = false;
    if (!phi_has_constant_from_outside_and_one_from_inside_loop(cond_phi,
@@ -177,8 +177,8 @@ opt_peel_loop_initial_if(nir_loop *loop)
    /* If they both execute or both don't execute, this is a job for
     * nir_dead_cf, not this pass.
     */
-   if ((entry_val && continue_val) || (!entry_val && !continue_val))
-      return false;
+   if ((entry_val && continue_val) || (!entry_val && !continue_val)) {
+      COVPOINT_ASSERT("NirOptIf181"); return false; }
 
    struct exec_list *continue_list, *entry_list;
    if (continue_val) {
@@ -195,8 +195,8 @@ opt_peel_loop_initial_if(nir_loop *loop)
    foreach_list_typed(nir_cf_node, cf_node, node, entry_list) {
       nir_foreach_block_in_cf_node(block, cf_node) {
          nir_instr *last_instr = nir_block_last_instr(block);
-         if (last_instr && last_instr->type == nir_instr_type_jump)
-            return false;
+         if (last_instr && last_instr->type == nir_instr_type_jump) {
+            COVPOINT_ASSERT("NirOptIf199"); return false; }
       }
    }
 
@@ -256,8 +256,8 @@ opt_peel_loop_initial_if(nir_loop *loop)
 
    if (continue_list_jumps) {
       nir_instr *last_instr = nir_block_last_instr(continue_block);
-      if (last_instr && last_instr->type == nir_instr_type_jump)
-         nir_instr_remove(last_instr);
+      if (last_instr && last_instr->type == nir_instr_type_jump) {
+         COVPOINT_ASSERT("NirOptIf260"); nir_instr_remove(last_instr); }
    }
 
    nir_cf_reinsert(&tmp,
@@ -829,8 +829,8 @@ opt_if_loop_last_continue(nir_loop *loop, bool aggressive_last_continue)
                         nir_after_block(last_block));
    if (then_ends_in_continue)
       nir_cf_reinsert(&tmp, nir_after_cf_list(&nif->else_list));
-   else
-      nir_cf_reinsert(&tmp, nir_after_cf_list(&nif->then_list));
+   else {
+      COVPOINT_ASSERT("NirOptIf833"); nir_cf_reinsert(&tmp, nir_after_cf_list(&nif->then_list)); }
 
    /* In order to avoid running nir_lower_regs_to_ssa_impl() every time an if
     * opt makes progress we leave nir_opt_trivial_continues() to remove the
@@ -1261,8 +1261,8 @@ opt_if_merge(nir_if *nif)
        * opt_if_evaluate_condition_use will optimize it later.
        */
       if (nir_block_ends_in_jump(nir_if_last_then_block(nif)) ||
-          nir_block_ends_in_jump(nir_if_last_else_block(nif)))
-         return false;
+          nir_block_ends_in_jump(nir_if_last_else_block(nif))) {
+         COVPOINT_ASSERT("NirOptIf1265"); return false; }
 
       simple_merge_if(nif, next_if, true, true);
       simple_merge_if(nif, next_if, false, false);

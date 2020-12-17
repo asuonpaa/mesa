@@ -34,7 +34,7 @@
 static bool
 is_not_negative(enum ssa_ranges r)
 {
-   return r == gt_zero || r == ge_zero || r == eq_zero;
+   COVPOINT_ASSERT("NirRangeAnalysis37"); return r == gt_zero || r == ge_zero || r == eq_zero;
 }
 
 static void *
@@ -828,7 +828,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
          r.range = ge_zero;
       } else if (left.range != eq_zero && nir_alu_srcs_negative_equal(alu, alu, 0, 1)) {
          /* -x * x => le_zero. */
-         r.range = le_zero;
+         COVPOINT_ASSERT("NirRangeAnalysis831"); r.range = le_zero;
       } else
          r.range = fmul_table[left.range][right.range];
 
@@ -863,7 +863,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
          break;
 
       case eq_zero:
-         assert(r.is_integral);
+         COVPOINT_ASSERT("NirRangeAnalysis866"); assert(r.is_integral);
       case gt_zero:
       case ge_zero:
          /* The fsat doesn't add any information in these cases. */
@@ -913,10 +913,10 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
 
       if (left.is_integral || left.range == ge_zero || left.range == gt_zero)
          r.range = left.range;
-      else if (left.range == le_zero || left.range == lt_zero)
-         r.range = le_zero;
-      else if (left.range == ne_zero)
-         r.range = unknown;
+      else if (left.range == le_zero || left.range == lt_zero) {
+         COVPOINT_ASSERT("NirRangeAnalysis917"); r.range = le_zero; }
+      else if (left.range == ne_zero) {
+         COVPOINT_ASSERT("NirRangeAnalysis919"); r.range = unknown; }
 
       break;
    }
@@ -929,12 +929,12 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
 
       if (left.is_integral)
          r.range = left.range;
-      else if (left.range == ge_zero || left.range == gt_zero)
-         r.range = ge_zero;
-      else if (left.range == le_zero || left.range == lt_zero)
-         r.range = le_zero;
-      else if (left.range == ne_zero)
-         r.range = unknown;
+      else if (left.range == ge_zero || left.range == gt_zero) {
+         COVPOINT_ASSERT("NirRangeAnalysis933"); r.range = ge_zero; }
+      else if (left.range == le_zero || left.range == lt_zero) {
+         COVPOINT_ASSERT("NirRangeAnalysis935"); r.range = le_zero; }
+      else if (left.range == ne_zero) {
+         COVPOINT_ASSERT("NirRangeAnalysis937"); r.range = unknown; }
 
       break;
    }
@@ -950,7 +950,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
    case nir_op_ult:
    case nir_op_uge:
       /* Boolean results are 0 or -1. */
-      r = (struct ssa_result_range){le_zero, false};
+      COVPOINT_ASSERT("NirRangeAnalysis953"); r = (struct ssa_result_range){le_zero, false};
       break;
 
    case nir_op_fpow: {

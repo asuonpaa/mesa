@@ -72,7 +72,7 @@ build_idiv(nir_builder *b, nir_ssa_def *n, int64_t d)
    } else if (d == 1) {
       return n;
    } else if (d == -1) {
-      return nir_ineg(b, n);
+      COVPOINT_ASSERT("NirOptIdivConst75"); return nir_ineg(b, n);
    } else if (util_is_power_of_two_or_zero64(abs_d)) {
       nir_ssa_def *uq = nir_ushr_imm(b, nir_iabs(b, n), util_logbase2_64(abs_d));
       nir_ssa_def *n_neg = nir_ilt(b, n, nir_imm_intN_t(b, 0, n->bit_size));
@@ -86,8 +86,8 @@ build_idiv(nir_builder *b, nir_ssa_def *n, int64_t d)
          nir_imul_high(b, n, nir_imm_intN_t(b, m.multiplier, n->bit_size));
       if (d > 0 && m.multiplier < 0)
          res = nir_iadd(b, res, n);
-      if (d < 0 && m.multiplier > 0)
-         res = nir_isub(b, res, n);
+      if (d < 0 && m.multiplier > 0) {
+         COVPOINT_ASSERT("NirOptIdivConst90");res = nir_isub(b, res, n); }
       if (m.shift)
          res = nir_ishr_imm(b, res, m.shift);
       res = nir_iadd(b, res, nir_ushr_imm(b, res, n->bit_size - 1));

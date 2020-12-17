@@ -115,7 +115,7 @@ remove_phis_block(nir_block *block, nir_builder *b)
       if (!def) {
          /* In this case, the phi had no sources. So turn it into an undef. */
 
-         b->cursor = nir_after_phis(block);
+         COVPOINT_ASSERT("NirOptRemovePhis118"); b->cursor = nir_after_phis(block);
          def = nir_ssa_undef(b, phi->dest.ssa.num_components,
                              phi->dest.ssa.bit_size);
       } else if (mov) {
