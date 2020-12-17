@@ -1317,7 +1317,7 @@ nir_foreach_src(nir_instr *instr, nir_foreach_src_cb cb, void *state)
       break;
    case nir_instr_type_intrinsic:
       if (!visit_intrinsic_src(nir_instr_as_intrinsic(instr), cb, state)) {
-         COVPOINT_ASSERT("1320"); return false; }
+         COVPOINT_ASSERT("Nir1320"); return false; }
       break;
    case nir_instr_type_tex:
       if (!visit_tex_src(nir_instr_as_tex(instr), cb, state))
