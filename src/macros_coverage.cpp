@@ -7,15 +7,8 @@
 
 extern "C" {
 
-    static bool COVPOINT2(std::string msg, bool cond = true)
+    static void COVPOINT2(std::string msg)
     {    
-        /*
-           if (doAssert) {
-           std::cerr << msg << std::endl;
-           std::abort();
-           }
-         */
-
         static bool init = false;
         static std::map<std::string, bool> filter;
 
@@ -40,12 +33,11 @@ extern "C" {
             std::cout << "COV: " << msg << std::endl;
             already_printed[msg] = true;
         }
-        return cond;
     }
 
-    int COVPOINT(const char* msg, const int cond)
+    void COVPOINT(const char* msg)
     {
-        return COVPOINT2(std::string(msg), (cond == 1) ? true: false);
+        COVPOINT2(msg);
     }
 }
 

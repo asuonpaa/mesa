@@ -828,7 +828,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
          r.range = ge_zero;
       } else if (left.range != eq_zero && nir_alu_srcs_negative_equal(alu, alu, 0, 1)) {
          /* -x * x => le_zero. */
-         COVPOINT_ASSERT("NirRangeAnalysis831"); r.range = le_zero;
+         COVPOINT("NirRangeAnalysis831"); r.range = le_zero;
       } else
          r.range = fmul_table[left.range][right.range];
 

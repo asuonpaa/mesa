@@ -361,13 +361,12 @@ enum pipe_debug_type
 #endif
 #endif
 
-#define COVPOINT_ASSERT(M) COVPOINT(M, 1); assert(0 && M)
-#define COVPOINT_ASSERT_COND(M, C) COVPOINT(M, C && assert(C && 0 && M))
+#define COVPOINT_ASSERT(M) COVPOINT(M); assert(0 && M)
 
 #ifdef __cplusplus
-extern "C" int COVPOINT(const char* msg, int cond);
+extern "C" void COVPOINT(const char* msg);
 #  else
-int COVPOINT(const char* msg, int cond);
+void COVPOINT(const char* msg);
 #endif
 
 #endif /* UTIL_MACROS_H */
