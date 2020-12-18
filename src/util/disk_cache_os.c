@@ -872,6 +872,7 @@ disk_cache_generate_cache_dir(void *mem_ctx)
 bool
 disk_cache_enabled()
 {
+#if 0
    /* If running as a users other than the real user disable cache */
    if (geteuid() != getuid())
       return false;
@@ -886,6 +887,9 @@ disk_cache_enabled()
       return false;
 
    return true;
+#else
+   return false;
+#endif
 }
 
 bool
