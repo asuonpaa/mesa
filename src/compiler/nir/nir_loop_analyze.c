@@ -804,7 +804,7 @@ calculate_iterations(nir_const_value initial, nir_const_value step,
     * unsigned with a huge iteration count so don't bother going any further.
     */
    if (iter_int < 0) {
-      COVPOINT_ASSERT("NirLoopAnalyze807"); return -1; }
+      COVPOINT("NirLoopAnalyze807"); return -1; }
 
    /* An explanation from the GLSL unrolling pass:
     *
