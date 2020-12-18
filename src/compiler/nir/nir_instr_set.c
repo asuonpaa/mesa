@@ -477,7 +477,7 @@ nir_alu_srcs_negative_equal(const nir_alu_instr *alu1,
             return false;
       }
 
-      COVPOINT_ASSERT("NirInstrSet480"); return true;
+      COVPOINT("NirInstrSet480"); return true;
    }
 
    uint8_t alu1_swizzle[NIR_MAX_VEC_COMPONENTS] = {0};
