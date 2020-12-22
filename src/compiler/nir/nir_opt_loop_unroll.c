@@ -227,7 +227,7 @@ get_complex_unroll_insert_location(nir_cf_node *node, bool continue_from_then)
    } else {
       nir_if *if_stmt = nir_cf_node_as_if(node);
       if (continue_from_then) {
-         COVPOINT_ASSERT("NirOptLoopUnroll230"); return nir_after_block(nir_if_last_then_block(if_stmt));
+         COVPOINT("NirOptLoopUnroll230"); return nir_after_block(nir_if_last_then_block(if_stmt));
       } else {
          return nir_after_block(nir_if_last_else_block(if_stmt));
       }
