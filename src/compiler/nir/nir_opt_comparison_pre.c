@@ -255,7 +255,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
                nir_alu_instr *const cmp = *a;
 
                if (cmp == NULL) {
-                  COVPOINT_ASSERT("NirOptComparisonPre258"); continue; }
+                  COVPOINT("NirOptComparisonPre258"); continue; }
 
                /* The operands of both instructions are, with some liberty,
                 * commutative.  Check all four permutations.  The third and
