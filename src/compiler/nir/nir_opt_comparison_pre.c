@@ -139,7 +139,7 @@ static void
 rewrite_compare_instruction(nir_builder *bld, nir_alu_instr *orig_cmp,
                             nir_alu_instr *orig_add, bool zero_on_left)
 {
-   COVPOINT_ASSERT("NirOptComparisonPre142"); void *const mem_ctx = ralloc_parent(orig_cmp);
+   COVPOINT("NirOptComparisonPre142"); void *const mem_ctx = ralloc_parent(orig_cmp);
 
    bld->cursor = nir_before_instr(&orig_cmp->instr);
 
@@ -284,7 +284,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
                    *
                    *    A cmp B <=> 0 cmp B + -A
                    */
-                  COVPOINT_ASSERT("NirOptComparisonPre287"); rewrite_compare_instruction(bld, cmp, alu, true);
+                  COVPOINT("NirOptComparisonPre287"); rewrite_compare_instruction(bld, cmp, alu, true);
 
                   *a = NULL;
                   rewrote_compare = true;
@@ -307,7 +307,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
              * care of by calling the optimization pass repeatedly.
              */
             if (rewrote_compare) {
-               COVPOINT_ASSERT("NirOptComparisonPre310"); progress = true;
+               COVPOINT("NirOptComparisonPre310"); progress = true;
                break;
             }
 
@@ -340,7 +340,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
       nir_block *child = block->dom_children[i];
 
       if (comparison_pre_block(child, bq, bld)) {
-         COVPOINT_ASSERT("NirOptComparisonPre343"); progress = true; }
+         COVPOINT("NirOptComparisonPre343"); progress = true; }
    }
 
    pop_block(bq, bi);
@@ -365,7 +365,7 @@ nir_opt_comparison_pre_impl(nir_function_impl *impl)
    block_queue_finish(&bq);
 
    if (progress) {
-      COVPOINT_ASSERT("NirOptComparisonPre368"); nir_metadata_preserve(impl, nir_metadata_block_index |
+      COVPOINT("NirOptComparisonPre368"); nir_metadata_preserve(impl, nir_metadata_block_index |
                                   nir_metadata_dominance);
    } else {
       nir_metadata_preserve(impl, nir_metadata_all);
