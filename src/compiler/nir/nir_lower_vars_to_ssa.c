@@ -185,7 +185,7 @@ get_deref_node_recur(nir_deref_instr *deref,
           * somewhat gracefully.
           */
          if (index >= glsl_get_length(parent->type)) {
-            COVPOINT_ASSERT("NirLowerVarsToSSA118"); return UNDEF_NODE; }
+            COVPOINT("NirLowerVarsToSSA188"); return UNDEF_NODE; }
 
          if (parent->children[index] == NULL) {
             parent->children[index] =
