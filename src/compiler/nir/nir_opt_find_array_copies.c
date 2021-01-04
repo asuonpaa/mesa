@@ -458,7 +458,7 @@ handle_write(nir_deref_instr *dst, nir_deref_instr *src,
                                        *instr);
          nir_deref_path_finish(&src_path);
          if (!result) {
-            COVPOINT_ASSERT("NirOptFindArrayCopies461"); goto reset; }
+            COVPOINT("NirOptFindArrayCopies461"); goto reset; }
       }
 
       /* Check if an aliasing write clobbered the array after the last normal

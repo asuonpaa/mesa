@@ -34,7 +34,7 @@
 static bool
 is_not_negative(enum ssa_ranges r)
 {
-   COVPOINT_ASSERT("NirRangeAnalysis37"); return r == gt_zero || r == ge_zero || r == eq_zero;
+   COVPOINT("NirRangeAnalysis37"); return r == gt_zero || r == ge_zero || r == eq_zero;
 }
 
 static void *

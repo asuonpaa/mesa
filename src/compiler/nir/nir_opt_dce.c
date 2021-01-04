@@ -96,7 +96,7 @@ init_instr(nir_instr *instr, nir_instr_worklist *worklist)
    case nir_instr_type_tex:
       tex_instr = nir_instr_as_tex(instr);
       if (!tex_instr->dest.is_ssa) {
-         COVPOINT_ASSERT("NirOptDce99"); mark_and_push(worklist, instr); }
+         COVPOINT("NirOptDce99"); mark_and_push(worklist, instr); }
       break;
 
    default:

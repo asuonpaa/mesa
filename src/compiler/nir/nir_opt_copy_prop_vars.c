@@ -598,7 +598,7 @@ load_from_ssa_entry_value(struct copy_prop_var_state *state,
        * created the cursor after the intrinsic and have added at least one
        * instruction (the vec) since then.
        */
-      COVPOINT_ASSERT("NirOptCopyPropVars601"); assert(b->cursor.instr != &intrin->instr);
+      COVPOINT("NirOptCopyPropVars601"); assert(b->cursor.instr != &intrin->instr);
       nir_instr_remove(&intrin->instr);
       intrin->instr.block = NULL;
    }
