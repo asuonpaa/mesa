@@ -531,7 +531,7 @@ wrapper_unroll(nir_loop *loop)
        * terminators one after the other.
        */
       if (list_length(&loop->info->loop_terminator_list) > 3) {
-         COVPOINT_ASSERT("NirOptLoopUnroll534"); return false; }
+         COVPOINT("NirOptLoopUnroll534"); return false; }
 
       loop_prepare_for_unroll(loop);
 

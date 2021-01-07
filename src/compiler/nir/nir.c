@@ -1238,7 +1238,7 @@ visit_intrinsic_src(nir_intrinsic_instr *instr, nir_foreach_src_cb cb,
    unsigned num_srcs = nir_intrinsic_infos[instr->intrinsic].num_srcs;
    for (unsigned i = 0; i < num_srcs; i++) {
       if (!visit_src(&instr->src[i], cb, state)) {
-         COVPOINT_ASSERT("Nir1241"); return false; }
+         COVPOINT("Nir1241"); return false; }
    }
 
    return true;
@@ -1317,7 +1317,7 @@ nir_foreach_src(nir_instr *instr, nir_foreach_src_cb cb, void *state)
       break;
    case nir_instr_type_intrinsic:
       if (!visit_intrinsic_src(nir_instr_as_intrinsic(instr), cb, state)) {
-         COVPOINT_ASSERT("Nir1320"); return false; }
+         COVPOINT("Nir1320"); return false; }
       break;
    case nir_instr_type_tex:
       if (!visit_tex_src(nir_instr_as_tex(instr), cb, state))
