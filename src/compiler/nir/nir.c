@@ -1148,7 +1148,7 @@ nir_instr_ssa_def(nir_instr *instr)
       return &nir_instr_as_deref(instr)->dest.ssa;
 
    case nir_instr_type_tex:
-      COVPOINT_ASSERT("Nir1151"); assert(nir_instr_as_tex(instr)->dest.is_ssa);
+      COVPOINT("Nir1151"); assert(nir_instr_as_tex(instr)->dest.is_ssa);
       return &nir_instr_as_tex(instr)->dest.ssa;
 
    case nir_instr_type_intrinsic: {
