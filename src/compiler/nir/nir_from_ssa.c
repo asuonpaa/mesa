@@ -997,7 +997,7 @@ nir_lower_ssa_defs_to_regs_block(nir_block *block)
    nir_foreach_instr(instr, block) {
       if (instr->type == nir_instr_type_ssa_undef) {
          /* Undefs are just a read of something never written. */
-         COVPOINT_ASSERT("NirFromSSA1000"); nir_ssa_undef_instr *undef = nir_instr_as_ssa_undef(instr);
+         COVPOINT("NirFromSSA1000"); nir_ssa_undef_instr *undef = nir_instr_as_ssa_undef(instr);
          nir_register *reg = create_reg_for_ssa_def(&undef->def, state.impl);
          nir_ssa_def_rewrite_uses(&undef->def, nir_src_for_reg(reg));
       } else if (instr->type == nir_instr_type_load_const) {
