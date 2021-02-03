@@ -101,7 +101,7 @@ nir_opt_conditional_discard_block(nir_builder *b, nir_block *block)
    case nir_intrinsic_discard_if:
    case nir_intrinsic_demote_if:
    case nir_intrinsic_terminate_if:
-      COVPOINT_ASSERT("NirOptConditionalDiscard104"); assert(intrin->src[0].is_ssa);
+      COVPOINT("NirOptConditionalDiscard104"); assert(intrin->src[0].is_ssa);
       cond = nir_iand(b, cond, intrin->src[0].ssa);
       break;
    default:

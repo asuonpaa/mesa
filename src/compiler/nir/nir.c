@@ -822,7 +822,7 @@ reduce_cursor(nir_cursor cursor)
       nir_instr *prev_instr = nir_instr_prev(cursor.instr);
       if (prev_instr) {
          /* Before this instruction is after the previous */
-         COVPOINT_ASSERT("Nir825"); cursor.instr = prev_instr;
+         COVPOINT("Nir825"); cursor.instr = prev_instr;
          cursor.option = nir_cursor_after_instr;
       } else {
          /* No previous instruction.  Switch to before block */
@@ -833,7 +833,7 @@ reduce_cursor(nir_cursor cursor)
    }
 
    case nir_cursor_after_instr:
-      COVPOINT_ASSERT("Nir836"); if (nir_instr_next(cursor.instr) == NULL) {
+      COVPOINT("Nir836"); if (nir_instr_next(cursor.instr) == NULL) {
          /* This is the last instruction, switch to after block */
          cursor.option = nir_cursor_after_block;
          cursor.block = cursor.instr->block;

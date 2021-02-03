@@ -178,7 +178,7 @@ opt_peel_loop_initial_if(nir_loop *loop)
     * nir_dead_cf, not this pass.
     */
    if ((entry_val && continue_val) || (!entry_val && !continue_val)) {
-      COVPOINT_ASSERT("NirOptIf181"); return false; }
+      COVPOINT("NirOptIf181"); return false; }
 
    struct exec_list *continue_list, *entry_list;
    if (continue_val) {
@@ -830,7 +830,7 @@ opt_if_loop_last_continue(nir_loop *loop, bool aggressive_last_continue)
    if (then_ends_in_continue)
       nir_cf_reinsert(&tmp, nir_after_cf_list(&nif->else_list));
    else {
-      COVPOINT_ASSERT("NirOptIf833"); nir_cf_reinsert(&tmp, nir_after_cf_list(&nif->then_list)); }
+      COVPOINT("NirOptIf833"); nir_cf_reinsert(&tmp, nir_after_cf_list(&nif->then_list)); }
 
    /* In order to avoid running nir_lower_regs_to_ssa_impl() every time an if
     * opt makes progress we leave nir_opt_trivial_continues() to remove the
@@ -1262,7 +1262,7 @@ opt_if_merge(nir_if *nif)
        */
       if (nir_block_ends_in_jump(nir_if_last_then_block(nif)) ||
           nir_block_ends_in_jump(nir_if_last_else_block(nif))) {
-         COVPOINT_ASSERT("NirOptIf1265"); return false; }
+         COVPOINT("NirOptIf1265"); return false; }
 
       simple_merge_if(nif, next_if, true, true);
       simple_merge_if(nif, next_if, false, false);

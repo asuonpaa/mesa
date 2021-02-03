@@ -721,7 +721,7 @@ nir_vector_insert(nir_builder *b, nir_ssa_def *vec, nir_ssa_def *scalar,
       if (c_const < vec->num_components)
          return nir_vector_insert_imm(b, vec, scalar, c_const);
       else {
-         COVPOINT_ASSERT("NirBuilderH724"); return vec;}
+         COVPOINT("NirBuilderH724"); return vec;}
    } else {
       nir_const_value per_comp_idx_const[NIR_MAX_VEC_COMPONENTS];
       for (unsigned i = 0; i < NIR_MAX_VEC_COMPONENTS; i++)
