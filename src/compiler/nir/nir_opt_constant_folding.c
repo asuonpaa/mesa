@@ -235,7 +235,7 @@ try_fold_intrinsic(nir_builder *b, nir_intrinsic_instr *intrin,
          return false;
       }
 
-      COVPOINT_ASSERT("NirOptConstantFolding238"); unsigned offset = nir_src_as_uint(intrin->src[0]);
+      COVPOINT("NirOptConstantFolding238"); unsigned offset = nir_src_as_uint(intrin->src[0]);
       unsigned base = nir_intrinsic_base(intrin);
       unsigned range = nir_intrinsic_range(intrin);
       assert(base + range <= b->shader->constant_data_size);
@@ -337,7 +337,7 @@ nir_opt_constant_folding(nir_shader *shader)
     */
    if (state.has_load_constant && !state.has_indirect_load_const &&
        shader->constant_data_size) {
-      COVPOINT_ASSERT("NirOptConstantFolding340"); ralloc_free(shader->constant_data);
+      COVPOINT("NirOptConstantFolding340"); ralloc_free(shader->constant_data);
       shader->constant_data = NULL;
       shader->constant_data_size = 0;
    }

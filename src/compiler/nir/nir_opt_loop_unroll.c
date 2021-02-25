@@ -466,7 +466,7 @@ complex_unroll(nir_loop *loop, nir_loop_terminator *unlimit_term,
 static void
 complex_unroll_single_terminator(nir_loop *loop)
 {
-   COVPOINT_ASSERT("NirOptLoopUnroll469"); assert(list_length(&loop->info->loop_terminator_list) == 1);
+   COVPOINT("NirOptLoopUnroll469"); assert(list_length(&loop->info->loop_terminator_list) == 1);
    assert(loop->info->limiting_terminator);
    assert(nir_is_trivial_loop_if(loop->info->limiting_terminator->nif,
                                  loop->info->limiting_terminator->break_block));
@@ -940,7 +940,7 @@ process_loops(nir_shader *sh, nir_cf_node *cf_node, bool *has_nested_loop_out,
          }
 
          if (num_lt == 1) {
-            COVPOINT_ASSERT("NirOptLoopUnroll943"); assert(loop->info->limiting_terminator->exact_trip_count_unknown);
+            COVPOINT("NirOptLoopUnroll943"); assert(loop->info->limiting_terminator->exact_trip_count_unknown);
             complex_unroll_single_terminator(loop);
             progress = true;
          }

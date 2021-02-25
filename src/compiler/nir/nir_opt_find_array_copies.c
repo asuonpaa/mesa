@@ -370,7 +370,7 @@ try_match_deref(nir_deref_path *base_path, int *path_array_idx,
              (const_b_idx && const_d_idx && b_idx == d_idx))
             continue;
 
-         COVPOINT_ASSERT("NirOptFindArrayCopies373"); return false;
+         COVPOINT("NirOptFindArrayCopies373"); return false;
 
       case nir_deref_type_array_wildcard:
          continue;

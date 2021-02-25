@@ -863,7 +863,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
          break;
 
       case eq_zero:
-         COVPOINT_ASSERT("NirRangeAnalysis866"); assert(r.is_integral);
+         COVPOINT("NirRangeAnalysis866"); assert(r.is_integral);
       case gt_zero:
       case ge_zero:
          /* The fsat doesn't add any information in these cases. */

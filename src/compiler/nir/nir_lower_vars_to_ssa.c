@@ -647,7 +647,7 @@ rename_variables(struct lower_variables_state *state)
                new_def = nir_swizzle(&b, value, swiz,
                                      intrin->num_components);
             } else {
-               COVPOINT_ASSERT("NirLowerVarsToSSA650"); nir_ssa_def *old_def =
+               COVPOINT("NirLowerVarsToSSA650"); nir_ssa_def *old_def =
                   nir_phi_builder_value_get_block_def(node->pb_value, block);
                /* For writemasked store_var intrinsics, we combine the newly
                 * written values with the existing contents of unwritten

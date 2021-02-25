@@ -569,7 +569,7 @@ try_find_limit_of_alu(nir_ssa_scalar limit, nir_const_value *limit_val,
 
    nir_op limit_op = nir_ssa_scalar_alu_op(limit);
    if (limit_op == nir_op_imin || limit_op == nir_op_fmin) {
-      COVPOINT_ASSERT("NirLoopAnalyze572"); for (unsigned i = 0; i < 2; i++) {
+      COVPOINT("NirLoopAnalyze572"); for (unsigned i = 0; i < 2; i++) {
          nir_ssa_scalar src = nir_ssa_scalar_chase_alu_src(limit, i);
          if (nir_ssa_scalar_is_const(src)) {
             *limit_val = nir_ssa_scalar_as_const_value(src);
@@ -922,7 +922,7 @@ try_find_trip_count_vars_in_iand(nir_ssa_scalar *cond,
 
       /* If the loop is not breaking on (x && y) == 0 then return */
       if (nir_ssa_scalar_as_uint(zero) != 0) {
-         COVPOINT_ASSERT("NirLoopAnalyze925"); return false; }
+         COVPOINT("NirLoopAnalyze925"); return false; }
    }
 
    if (!nir_ssa_scalar_is_alu(iand))
