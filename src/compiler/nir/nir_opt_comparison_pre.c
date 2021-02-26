@@ -270,7 +270,7 @@ comparison_pre_block(nir_block *block, struct block_queue *bq, nir_builder *bld)
                    *
                    *    A cmp B <=> A + -B cmp 0
                    */
-                  COVPOINT_ASSERT("NirOptComparisonPre273"); rewrite_compare_instruction(bld, cmp, alu, false);
+                  COVPOINT("NirOptComparisonPre273"); rewrite_compare_instruction(bld, cmp, alu, false);
 
                   *a = NULL;
                   rewrote_compare = true;

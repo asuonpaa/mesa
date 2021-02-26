@@ -87,7 +87,7 @@ build_idiv(nir_builder *b, nir_ssa_def *n, int64_t d)
       if (d > 0 && m.multiplier < 0)
          res = nir_iadd(b, res, n);
       if (d < 0 && m.multiplier > 0) {
-         COVPOINT_ASSERT("NirOptIdivConst90");res = nir_isub(b, res, n); }
+         COVPOINT("NirOptIdivConst90");res = nir_isub(b, res, n); }
       if (m.shift)
          res = nir_ishr_imm(b, res, m.shift);
       res = nir_iadd(b, res, nir_ushr_imm(b, res, n->bit_size - 1));
