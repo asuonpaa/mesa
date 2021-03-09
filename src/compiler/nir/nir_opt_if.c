@@ -196,7 +196,7 @@ opt_peel_loop_initial_if(nir_loop *loop)
       nir_foreach_block_in_cf_node(block, cf_node) {
          nir_instr *last_instr = nir_block_last_instr(block);
          if (last_instr && last_instr->type == nir_instr_type_jump) {
-            COVPOINT_ASSERT("NirOptIf199"); return false; }
+            COVPOINT("NirOptIf199"); return false; }
       }
    }
 
@@ -257,7 +257,7 @@ opt_peel_loop_initial_if(nir_loop *loop)
    if (continue_list_jumps) {
       nir_instr *last_instr = nir_block_last_instr(continue_block);
       if (last_instr && last_instr->type == nir_instr_type_jump) {
-         COVPOINT_ASSERT("NirOptIf260"); nir_instr_remove(last_instr); }
+         COVPOINT("NirOptIf260"); nir_instr_remove(last_instr); }
    }
 
    nir_cf_reinsert(&tmp,

@@ -914,7 +914,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
       if (left.is_integral || left.range == ge_zero || left.range == gt_zero)
          r.range = left.range;
       else if (left.range == le_zero || left.range == lt_zero) {
-         COVPOINT_ASSERT("NirRangeAnalysis917"); r.range = le_zero; }
+         COVPOINT("NirRangeAnalysis917"); r.range = le_zero; }
       else if (left.range == ne_zero) {
          COVPOINT_ASSERT("NirRangeAnalysis919"); r.range = unknown; }
 

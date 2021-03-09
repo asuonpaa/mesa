@@ -568,7 +568,7 @@ rename_variables(struct lower_variables_state *state)
                 * reading past the end of some array.  In any case, this
                 * should result in an undefined value.
                 */
-               COVPOINT_ASSERT("NirLowerVarsToSSA571"); nir_ssa_undef_instr *undef =
+               COVPOINT("NirLowerVarsToSSA571"); nir_ssa_undef_instr *undef =
                   nir_ssa_undef_instr_create(state->shader,
                                              intrin->num_components,
                                              intrin->dest.ssa.bit_size);
@@ -621,7 +621,7 @@ rename_variables(struct lower_variables_state *state)
             if (node == UNDEF_NODE) {
                /* Probably an out-of-bounds array store.  That should be a
                 * no-op. */
-               COVPOINT_ASSERT("NirLowerVarsToSSA624"); nir_instr_remove(&intrin->instr);
+               COVPOINT("NirLowerVarsToSSA624"); nir_instr_remove(&intrin->instr);
                continue;
             }
 

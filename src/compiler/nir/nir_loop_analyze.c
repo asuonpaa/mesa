@@ -831,7 +831,7 @@ calculate_iterations(nir_const_value initial, nir_const_value step,
 static nir_op
 inverse_comparison(nir_op alu_op)
 {
-   COVPOINT_ASSERT("NirLoopAnalyze834"); switch (alu_op) {
+   COVPOINT("NirLoopAnalyze834"); switch (alu_op) {
    case nir_op_fge:
       return nir_op_flt;
    case nir_op_ige:
@@ -934,7 +934,7 @@ try_find_trip_count_vars_in_iand(nir_ssa_scalar *cond,
    /* Check if iand src is a terminator condition and try get induction var
     * and trip limit var.
     */
-   COVPOINT_ASSERT("NirLoopAnalyze937"); bool found_induction_var = false;
+   COVPOINT("NirLoopAnalyze937"); bool found_induction_var = false;
    for (unsigned i = 0; i < 2; i++) {
       nir_ssa_scalar src = nir_ssa_scalar_chase_alu_src(iand, i);
       if (is_supported_terminator_condition(src) &&
@@ -992,7 +992,7 @@ find_trip_count(loop_info_state *state, unsigned execution_mode)
           * inverse of x or y (i.e. which ever contained the induction var) in
           * order to compute the trip count.
           */
-         COVPOINT_ASSERT("NirLoopAnalyze995"); alu_op = inverse_comparison(nir_ssa_scalar_alu_op(cond));
+         COVPOINT("NirLoopAnalyze995"); alu_op = inverse_comparison(nir_ssa_scalar_alu_op(cond));
          trip_count_known = false;
          terminator->exact_trip_count_unknown = true;
       }
