@@ -684,8 +684,8 @@ brw_append_data(struct brw_codegen *p, void *data,
    memcpy(dst, data, size);
 
    /* If it's not a whole number of instructions, memset the end */
-   if (size < nr_insn * sizeof(brw_inst))
-      memset(dst + size, 0, nr_insn * sizeof(brw_inst) - size);
+   if (size < nr_insn * sizeof(brw_inst)) {
+      COVPOINT("BrwEuEmit688"); memset(dst + size, 0, nr_insn * sizeof(brw_inst) - size); }
 
    return dst - (void *)p->store;
 }
@@ -1363,7 +1363,7 @@ static void
 push_loop_stack(struct brw_codegen *p, brw_inst *inst)
 {
    if (p->loop_stack_array_size <= (p->loop_stack_depth + 1)) {
-      p->loop_stack_array_size *= 2;
+      COVPOINT_ASSERT("BrwEuEmit1366"); p->loop_stack_array_size *= 2;
       p->loop_stack = reralloc(p->mem_ctx, p->loop_stack, int,
 			       p->loop_stack_array_size);
       p->if_depth_in_loop = reralloc(p->mem_ctx, p->if_depth_in_loop, int,

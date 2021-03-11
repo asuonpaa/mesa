@@ -524,8 +524,8 @@ fs_visitor::try_copy_propagate(fs_inst *inst, int arg, acp_entry *entry)
     */
    const unsigned entry_stride = (entry->src.file == FIXED_GRF ? 1 :
                                   entry->src.stride);
-   if (instruction_requires_packed_data(inst) && entry_stride != 1)
-      return false;
+   if (instruction_requires_packed_data(inst) && entry_stride != 1) {
+      COVPOINT("BrwFsCopyPropagation528"); return false; }
 
    /* Bail if the result of composing both strides would exceed the
     * hardware limit.
@@ -717,7 +717,7 @@ fs_visitor::try_constant_propagate(fs_inst *inst, acp_entry *entry)
       val.type = inst->src[i].type;
 
       if (inst->src[i].abs) {
-         if ((devinfo->gen >= 8 && is_logic_op(inst->opcode)) ||
+         COVPOINT("BrwFsCopyPropagation720"); if ((devinfo->gen >= 8 && is_logic_op(inst->opcode)) ||
              !brw_abs_immediate(val.type, &val.as_brw_reg())) {
             continue;
          }
@@ -726,7 +726,7 @@ fs_visitor::try_constant_propagate(fs_inst *inst, acp_entry *entry)
       if (inst->src[i].negate) {
          if ((devinfo->gen >= 8 && is_logic_op(inst->opcode)) ||
              !brw_negate_immediate(val.type, &val.as_brw_reg())) {
-            continue;
+            COVPOINT_ASSERT("BrwFsCopyPropagation729"); continue;
          }
       }
 

@@ -133,8 +133,8 @@ bblock_t::can_combine_with(const bblock_t *that) const
       return false;
 
    if (ends_block(this->end()) ||
-       starts_block(that->start()))
-      return false;
+       starts_block(that->start())) {
+      COVPOINT("BrwCfg137"); return false; }
 
    return true;
 }

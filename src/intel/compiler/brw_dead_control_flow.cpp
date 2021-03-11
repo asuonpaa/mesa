@@ -78,7 +78,7 @@ dead_control_flow_eliminate(backend_shader *s)
          if_inst->remove(if_block);
 
          if (endif_block->start_ip == endif_block->end_ip) {
-            later_block = endif_block->next();
+            COVPOINT("BrwDeadControlFlow81"); later_block = endif_block->next();
          } else {
             later_block = endif_block;
          }

@@ -65,7 +65,7 @@ is_if_use_inside_loop(nir_src *use, nir_loop *loop)
       nir_cf_node_as_block(nir_cf_node_prev(&use->parent_if->cf_node));
    if (prev_block->index <= block_before_loop->index ||
        prev_block->index >= block_after_loop->index) {
-      return false;
+      COVPOINT_ASSERT("NirToLCSSA68"); return false;
    }
 
    return true;
@@ -217,7 +217,7 @@ convert_loop_exit_for_ssa(nir_ssa_def *def, void *void_state)
 
    nir_foreach_if_use(use, def) {
       if (!is_if_use_inside_loop(use, state->loop)) {
-         all_uses_inside_loop = false;
+         COVPOINT_ASSERT("NirToLCSSA220"); all_uses_inside_loop = false;
       }
    }
 
@@ -278,7 +278,7 @@ convert_loop_exit_for_ssa(nir_ssa_def *def, void *void_state)
 
    nir_foreach_if_use_safe(use, def) {
       if (!is_if_use_inside_loop(use, state->loop)) {
-         nir_if_rewrite_condition(use->parent_if, nir_src_for_ssa(dest));
+         COVPOINT_ASSERT("NirToLCSSA281"); nir_if_rewrite_condition(use->parent_if, nir_src_for_ssa(dest));
       }
    }
 

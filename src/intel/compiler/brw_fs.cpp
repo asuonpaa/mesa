@@ -671,8 +671,8 @@ fs_visitor::vfail(const char *format, va_list va)
 {
    char *msg;
 
-   if (failed)
-      return;
+   if (failed) {
+      COVPOINT_ASSERT("BrwFs675"); return; }
 
    failed = true;
 
@@ -2789,7 +2789,7 @@ fs_visitor::opt_algebraic()
             progress = true;
          }
          if (inst->src[0].equals(inst->src[1])) {
-            inst->opcode = BRW_OPCODE_MOV;
+            COVPOINT("BrwFs2792"); inst->opcode = BRW_OPCODE_MOV;
             inst->src[1] = reg_undef;
             inst->predicate = BRW_PREDICATE_NONE;
             inst->predicate_inverse = false;
@@ -2816,7 +2816,7 @@ fs_visitor::opt_algebraic()
                switch (inst->src[1].type) {
                case BRW_REGISTER_TYPE_F:
                   if (inst->src[1].f <= 0.0f) {
-                     inst->opcode = BRW_OPCODE_MOV;
+                     COVPOINT_ASSERT("BrwFs2819"); inst->opcode = BRW_OPCODE_MOV;
                      inst->src[1] = reg_undef;
                      inst->conditional_mod = BRW_CONDITIONAL_NONE;
                      progress = true;
@@ -2836,7 +2836,7 @@ fs_visitor::opt_algebraic()
              inst->src[2].type != BRW_REGISTER_TYPE_F)
             break;
          if (inst->src[1].is_one()) {
-            inst->opcode = BRW_OPCODE_ADD;
+            COVPOINT_ASSERT("BrwFs2839"); inst->opcode = BRW_OPCODE_ADD;
             inst->src[1] = inst->src[2];
             inst->src[2] = reg_undef;
             progress = true;
@@ -7155,7 +7155,7 @@ fs_visitor::dump_instructions() const
 void
 fs_visitor::dump_instructions(const char *name) const
 {
-   FILE *file = stderr;
+   COVPOINT_ASSERT("BrwFs7158"); FILE *file = stderr;
    if (name && geteuid() != 0) {
       file = fopen(name, "w");
       if (!file)
@@ -7194,7 +7194,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst) const
 void
 fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) const
 {
-   const fs_inst *inst = (const fs_inst *)be_inst;
+   COVPOINT_ASSERT("BrwFs7197"); const fs_inst *inst = (const fs_inst *)be_inst;
 
    if (inst->predicate) {
       fprintf(file, "(%cf%d.%d) ",
@@ -7531,7 +7531,7 @@ fs_visitor::setup_cs_payload()
 
 brw::register_pressure::register_pressure(const fs_visitor *v)
 {
-   const fs_live_variables &live = v->live_analysis.require();
+   COVPOINT_ASSERT("BrwFs7534"); const fs_live_variables &live = v->live_analysis.require();
    const unsigned num_instructions = v->cfg->num_blocks ?
       v->cfg->blocks[v->cfg->num_blocks - 1]->end_ip + 1 : 0;
 
@@ -8806,7 +8806,7 @@ brw_compile_fs(const struct brw_compiler *compiler, void *log_data,
    v8 = new fs_visitor(compiler, log_data, mem_ctx, &key->base,
                        &prog_data->base, nir, 8, shader_time_index8);
    if (!v8->run_fs(allow_spilling, false /* do_rep_send */)) {
-      if (error_str)
+      COVPOINT_ASSERT("BrwFs8809"); if (error_str)
          *error_str = ralloc_strdup(mem_ctx, v8->fail_msg);
 
       delete v8;

@@ -403,7 +403,7 @@ opt_cmod_propagation_local(const gen_device_info *devinfo, bblock_t *block)
                        inst->src[0].type == BRW_REGISTER_TYPE_UD) ||
                       (inst->conditional_mod == BRW_CONDITIONAL_L &&
                        inst->src[0].type == BRW_REGISTER_TYPE_D)) {
-                     inst->remove(block);
+                     COVPOINT("BrwFsCmodPropagation406"); inst->remove(block);
                      progress = true;
                      break;
                   }

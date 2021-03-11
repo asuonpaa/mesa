@@ -649,8 +649,8 @@ array_path_is_out_of_bounds(nir_deref_path *path,
          continue;
 
       if (nir_src_is_const(p->arr.index) &&
-          nir_src_as_uint(p->arr.index) >= info->levels[i].array_len)
-         return true;
+          nir_src_as_uint(p->arr.index) >= info->levels[i].array_len) {
+         COVPOINT_ASSERT("NirSplitVars653"); return true; }
    }
 
    return false;
@@ -815,7 +815,7 @@ split_array_access_impl(nir_function_impl *impl,
                 * undefined garbage anyway and we may as well leave the random
                 * garbage in the destination alone.
                 */
-               if (intrin->intrinsic == nir_intrinsic_load_deref) {
+               COVPOINT_ASSERT("NirSplitVars818"); if (intrin->intrinsic == nir_intrinsic_load_deref) {
                   nir_ssa_def *u =
                      nir_ssa_undef(&b, intrin->dest.ssa.num_components,
                                        intrin->dest.ssa.bit_size);
