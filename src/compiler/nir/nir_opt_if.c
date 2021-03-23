@@ -165,7 +165,7 @@ opt_peel_loop_initial_if(nir_loop *loop)
 
    nir_phi_instr *cond_phi = nir_instr_as_phi(cond->parent_instr);
    if (cond->parent_instr->block != header_block) {
-      COVPOINT_ASSERT("NirOptIf168"); return false; }
+      COVPOINT("NirOptIf168"); return false; }
 
    bool entry_val = false, continue_val = false;
    if (!phi_has_constant_from_outside_and_one_from_inside_loop(cond_phi,

@@ -672,7 +672,7 @@ fs_visitor::vfail(const char *format, va_list va)
    char *msg;
 
    if (failed) {
-      COVPOINT_ASSERT("BrwFs675"); return; }
+      COVPOINT("BrwFs675"); return; }
 
    failed = true;
 
@@ -7155,7 +7155,7 @@ fs_visitor::dump_instructions() const
 void
 fs_visitor::dump_instructions(const char *name) const
 {
-   COVPOINT_ASSERT("BrwFs7158"); FILE *file = stderr;
+   COVPOINT("BrwFs7158"); FILE *file = stderr;
    if (name && geteuid() != 0) {
       file = fopen(name, "w");
       if (!file)
@@ -7194,7 +7194,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst) const
 void
 fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) const
 {
-   COVPOINT_ASSERT("BrwFs7197"); const fs_inst *inst = (const fs_inst *)be_inst;
+   COVPOINT("BrwFs7197"); const fs_inst *inst = (const fs_inst *)be_inst;
 
    if (inst->predicate) {
       fprintf(file, "(%cf%d.%d) ",
@@ -7531,7 +7531,7 @@ fs_visitor::setup_cs_payload()
 
 brw::register_pressure::register_pressure(const fs_visitor *v)
 {
-   COVPOINT_ASSERT("BrwFs7534"); const fs_live_variables &live = v->live_analysis.require();
+   COVPOINT("BrwFs7534"); const fs_live_variables &live = v->live_analysis.require();
    const unsigned num_instructions = v->cfg->num_blocks ?
       v->cfg->blocks[v->cfg->num_blocks - 1]->end_ip + 1 : 0;
 
@@ -8806,7 +8806,7 @@ brw_compile_fs(const struct brw_compiler *compiler, void *log_data,
    v8 = new fs_visitor(compiler, log_data, mem_ctx, &key->base,
                        &prog_data->base, nir, 8, shader_time_index8);
    if (!v8->run_fs(allow_spilling, false /* do_rep_send */)) {
-      COVPOINT_ASSERT("BrwFs8809"); if (error_str)
+      COVPOINT("BrwFs8809"); if (error_str)
          *error_str = ralloc_strdup(mem_ctx, v8->fail_msg);
 
       delete v8;

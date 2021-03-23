@@ -51,7 +51,7 @@ is_pos_power_of_two(UNUSED struct hash_table *ht, nir_alu_instr *instr,
          break;
       }
       case nir_type_uint: {
-         COVPOINT_ASSERT("NirSearchHelpersH54");uint64_t val = nir_src_comp_as_uint(instr->src[src].src, swizzle[i]);
+         COVPOINT("NirSearchHelpersH54");uint64_t val = nir_src_comp_as_uint(instr->src[src].src, swizzle[i]);
          if (val == 0 || !util_is_power_of_two_or_zero64(val))
             return false;
          break;
@@ -130,7 +130,7 @@ is_zero_to_one(UNUSED struct hash_table *ht, nir_alu_instr *instr, unsigned src,
       case nir_type_float: {
          double val = nir_src_comp_as_float(instr->src[src].src, swizzle[i]);
          if (isnan(val) || val < 0.0f || val > 1.0f) {
-            COVPOINT_ASSERT("NirSearchHelpersH133"); return false;}
+            COVPOINT("NirSearchHelpersH133"); return false;}
          break;
       }
       default:
@@ -213,7 +213,7 @@ static inline bool
 is_not_fmul(struct hash_table *ht, nir_alu_instr *instr, unsigned src,
             UNUSED unsigned num_components, UNUSED const uint8_t *swizzle)
 {
-   COVPOINT_ASSERT("NirSearchHelpersH216"); nir_alu_instr *src_alu =
+   COVPOINT("NirSearchHelpersH216"); nir_alu_instr *src_alu =
       nir_src_as_alu_instr(instr->src[src].src);
 
    if (src_alu == NULL)

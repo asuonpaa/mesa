@@ -3580,7 +3580,7 @@ struct vtn_ssa_value *
 vtn_ssa_transpose(struct vtn_builder *b, struct vtn_ssa_value *src)
 {
    if (src->transposed) {
-      COVPOINT_ASSERT("SpirvToNir3583"); return src->transposed; }
+      COVPOINT("SpirvToNir3583"); return src->transposed; }
 
    struct vtn_ssa_value *dest =
       vtn_create_ssa_value(b, glsl_transposed_type(src->type));
