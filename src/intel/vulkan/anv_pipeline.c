@@ -1569,7 +1569,7 @@ anv_pipeline_compile_graphics(struct anv_graphics_pipeline *pipeline,
          unreachable("Invalid graphics shader stage");
       }
       if (stages[s].code == NULL) {
-         ralloc_free(stage_ctx);
+         COVPOINT("AnvPipeline1572"); ralloc_free(stage_ctx);
          result = vk_error(VK_ERROR_OUT_OF_HOST_MEMORY);
          goto fail;
       }
@@ -1635,7 +1635,7 @@ done:
    return VK_SUCCESS;
 
 fail:
-   ralloc_free(pipeline_ctx);
+   COVPOINT("AnvPipeline1638"); ralloc_free(pipeline_ctx);
 
    for (unsigned s = 0; s < MESA_SHADER_STAGES; s++) {
       if (pipeline->shaders[s])

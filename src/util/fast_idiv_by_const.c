@@ -41,7 +41,7 @@
 #include "u_math.h"
 #include <limits.h>
 #include <assert.h>
-
+#include "util/macros.h"
 struct util_fast_udiv_info
 util_compute_fast_udiv_info(uint64_t D, unsigned num_bits, unsigned UINT_BITS)
 {
@@ -220,7 +220,7 @@ util_compute_fast_sdiv_info(int64_t D, unsigned SINT_BITS)
       quotient1 *= 2;
       remainder1 *= 2;
       if (remainder1 >= abs_test_numer) {
-         quotient1 += 1;
+         COVPOINT_ASSERT("FastIdivByConst223"); quotient1 += 1;
          remainder1 -= abs_test_numer;
       }
 

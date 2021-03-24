@@ -205,7 +205,7 @@ fs_visitor::register_coalesce()
          continue;
 
       if (is_nop_mov(inst)) {
-         inst->opcode = BRW_OPCODE_NOP;
+         COVPOINT("BrwFsRegisterCoalesce208"); inst->opcode = BRW_OPCODE_NOP;
          progress = true;
          continue;
       }

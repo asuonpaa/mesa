@@ -1627,7 +1627,7 @@ fs_instruction_scheduler::choose_instruction_to_schedule()
          /* Prefer the node most likely to unblock an early program exit.
           */
          if (exit_unblocked_time(n) < exit_unblocked_time(chosen)) {
-            chosen = n;
+            COVPOINT_ASSERT("BrwScheduleInstructions1630"); chosen = n;
             continue;
          } else if (exit_unblocked_time(n) > exit_unblocked_time(chosen)) {
             continue;

@@ -1069,8 +1069,8 @@ fs_reg_alloc::choose_spill_reg()
       set_spill_costs();
 
    int node = ra_get_best_spill_node(g);
-   if (node < 0)
-      return -1;
+   if (node < 0) {
+      COVPOINT("BrwFsRegAllocate1073"); return -1; }
 
    assert(node >= first_vgrf_node);
    return node - first_vgrf_node;
@@ -1306,8 +1306,8 @@ fs_reg_alloc::assign_regs(bool allow_spilling, bool spill_all)
        * loop back into here to try again.
        */
       int reg = choose_spill_reg();
-      if (reg == -1)
-         return false;
+      if (reg == -1) {
+         COVPOINT("BrwFsRegAllocate1310"); return false; }
 
       /* If we're going to spill but we've never spilled before, we need to
        * re-build the interference graph with MRFs enabled to allow spilling.
@@ -1357,7 +1357,7 @@ fs_visitor::assign_regs(bool allow_spilling, bool spill_all)
    fs_reg_alloc alloc(this);
    bool success = alloc.assign_regs(allow_spilling, spill_all);
    if (!success && allow_spilling) {
-      fail("no register to spill:\n");
+      COVPOINT("BrwFsRegAllocate1360"); fail("no register to spill:\n");
       dump_instructions(NULL);
    }
    return success;

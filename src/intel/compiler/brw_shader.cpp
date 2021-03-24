@@ -163,7 +163,7 @@ brw_texture_offset(const nir_tex_instr *tex, unsigned src,
 const char *
 brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
 {
-   switch (op) {
+   COVPOINT("BrwShader166"); switch (op) {
    case 0 ... NUM_BRW_OPCODES - 1:
       /* The DO instruction doesn't exist on Gen6+, but we use it to mark the
        * start of a loop in the IR.
@@ -661,7 +661,7 @@ brw_negate_immediate(enum brw_reg_type type, struct brw_reg *reg)
 bool
 brw_abs_immediate(enum brw_reg_type type, struct brw_reg *reg)
 {
-   switch (type) {
+   COVPOINT("BrwShader664"); switch (type) {
    case BRW_REGISTER_TYPE_D:
       reg->d = abs(reg->d);
       return true;

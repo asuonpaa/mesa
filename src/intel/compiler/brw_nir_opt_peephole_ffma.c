@@ -228,7 +228,7 @@ brw_nir_opt_peephole_ffma_block(nir_builder *b, nir_block *block)
       b->cursor = nir_before_instr(&add->instr);
 
       if (abs) {
-         for (unsigned i = 0; i < 2; i++)
+         COVPOINT_ASSERT("BrwNirOptPeepholeFFMA231"); for (unsigned i = 0; i < 2; i++)
             mul_src[i] = nir_fabs(b, mul_src[i]);
       }
 

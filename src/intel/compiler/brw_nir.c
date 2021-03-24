@@ -1060,7 +1060,7 @@ brw_postprocess_nir(nir_shader *nir, const struct brw_compiler *compiler,
    }
 
    if (OPT(nir_opt_comparison_pre)) {
-      OPT(nir_copy_prop);
+      COVPOINT("BrwNir1063"); OPT(nir_copy_prop);
       OPT(nir_opt_dce);
       OPT(nir_opt_cse);
 
