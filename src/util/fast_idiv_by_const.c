@@ -220,7 +220,7 @@ util_compute_fast_sdiv_info(int64_t D, unsigned SINT_BITS)
       quotient1 *= 2;
       remainder1 *= 2;
       if (remainder1 >= abs_test_numer) {
-         COVPOINT_ASSERT("FastIdivByConst223"); quotient1 += 1;
+         COVPOINT("FastIdivByConst223"); quotient1 += 1;
          remainder1 -= abs_test_numer;
       }
 

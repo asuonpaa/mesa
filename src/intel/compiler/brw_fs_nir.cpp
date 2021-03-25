@@ -3465,7 +3465,7 @@ fs_visitor::nir_emit_fs_intrinsic(const fs_builder &bld,
                if (cmp->can_do_cmod())
                   cmp->conditional_mod = BRW_CONDITIONAL_Z;
                else {
-                  COVPOINT_ASSERT("BrwFsNir3468"); cmp = NULL; }
+                  COVPOINT("BrwFsNir3468"); cmp = NULL; }
             } else {
                /* The old sequence that would have been generated is,
                 * basically, bool_result == false.  This is equivalent to
@@ -3476,7 +3476,7 @@ fs_visitor::nir_emit_fs_intrinsic(const fs_builder &bld,
          }
 
          if (cmp == NULL) {
-            COVPOINT_ASSERT("BrwFsNir3479"); cmp = bld.CMP(bld.null_reg_f(), get_nir_src(instr->src[0]),
+            COVPOINT("BrwFsNir3479"); cmp = bld.CMP(bld.null_reg_f(), get_nir_src(instr->src[0]),
                           brw_imm_d(0), BRW_CONDITIONAL_Z);
          }
       } else {
