@@ -706,8 +706,8 @@ nir_instrs_equal(const nir_instr *instr1, const nir_instr *instr2)
       nir_foreach_phi_src(src1, phi1) {
          nir_foreach_phi_src(src2, phi2) {
             if (src1->pred == src2->pred) {
-               if (!nir_srcs_equal(src1->src, src2->src))
-                  return false;
+               if (!nir_srcs_equal(src1->src, src2->src)) {
+                  COVPOINT_ASSERT("NirInstrSet710"); return false; }
 
                break;
             }

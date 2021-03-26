@@ -68,7 +68,7 @@ build_idiv(nir_builder *b, nir_ssa_def *n, int64_t d)
    uint64_t abs_d = d < 0 ? -d : d;
 
    if (d == 0) {
-      return nir_imm_intN_t(b, 0, n->bit_size);
+      COVPOINT_ASSERT("NirOptIdivConst71"); return nir_imm_intN_t(b, 0, n->bit_size);
    } else if (d == 1) {
       return n;
    } else if (d == -1) {

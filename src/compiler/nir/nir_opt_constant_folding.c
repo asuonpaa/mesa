@@ -243,7 +243,7 @@ try_fold_intrinsic(nir_builder *b, nir_intrinsic_instr *intrin,
       b->cursor = nir_before_instr(&intrin->instr);
       nir_ssa_def *val;
       if (offset >= range) {
-         val = nir_ssa_undef(b, intrin->dest.ssa.num_components,
+         COVPOINT_ASSERT("NirOptConstantFolding246"); val = nir_ssa_undef(b, intrin->dest.ssa.num_components,
                                 intrin->dest.ssa.bit_size);
       } else {
          nir_const_value imm[NIR_MAX_VEC_COMPONENTS];

@@ -925,8 +925,8 @@ try_find_trip_count_vars_in_iand(nir_ssa_scalar *cond,
          COVPOINT("NirLoopAnalyze925"); return false; }
    }
 
-   if (!nir_ssa_scalar_is_alu(iand))
-      return false;
+   if (!nir_ssa_scalar_is_alu(iand)) {
+      COVPOINT_ASSERT("NirLoopAnalyze929"); return false; }
 
    if (nir_ssa_scalar_alu_op(iand) != nir_op_iand)
       return false;
