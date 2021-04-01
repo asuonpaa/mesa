@@ -194,7 +194,7 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
       return "fb_read_logical";
 
    case SHADER_OPCODE_RCP:
-      COVPOINT_ASSERT("BrwShader197"); return "rcp";
+      COVPOINT("BrwShader197"); return "rcp";
    case SHADER_OPCODE_RSQ:
       return "rsq";
    case SHADER_OPCODE_SQRT:
@@ -431,9 +431,9 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
       return "linterp";
 
    case FS_OPCODE_PIXEL_X:
-      COVPOINT_ASSERT("BrwShader434"); return "pixel_x";
+      COVPOINT("BrwShader434"); return "pixel_x";
    case FS_OPCODE_PIXEL_Y:
-      COVPOINT_ASSERT("BrwShader436"); return "pixel_y";
+      COVPOINT("BrwShader436"); return "pixel_y";
 
    case FS_OPCODE_UNIFORM_PULL_CONSTANT_LOAD:
       return "uniform_pull_const";
@@ -514,7 +514,7 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
    case SHADER_OPCODE_MOV_INDIRECT:
       return "mov_indirect";
    case SHADER_OPCODE_MOV_RELOC_IMM:
-      COVPOINT_ASSERT("BrwShader517"); return "mov_reloc_imm";
+      COVPOINT("BrwShader517"); return "mov_reloc_imm";
 
    case VEC4_OPCODE_URB_READ:
       return "urb_read";

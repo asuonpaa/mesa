@@ -2816,7 +2816,7 @@ fs_visitor::opt_algebraic()
                switch (inst->src[1].type) {
                case BRW_REGISTER_TYPE_F:
                   if (inst->src[1].f <= 0.0f) {
-                     COVPOINT_ASSERT("BrwFs2819"); inst->opcode = BRW_OPCODE_MOV;
+                     COVPOINT("BrwFs2819"); inst->opcode = BRW_OPCODE_MOV;
                      inst->src[1] = reg_undef;
                      inst->conditional_mod = BRW_CONDITIONAL_NONE;
                      progress = true;
@@ -7282,7 +7282,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
    }
 
    if (inst->dst.stride != 1) {
-      COVPOINT_ASSERT("BrwFs7285"); fprintf(file, "<%u>", inst->dst.stride); }
+      COVPOINT("BrwFs7285"); fprintf(file, "<%u>", inst->dst.stride); }
    fprintf(file, ":%s, ", brw_reg_type_to_letters(inst->dst.type));
 
    for (int i = 0; i < inst->sources; i++) {
@@ -7295,7 +7295,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
          fprintf(file, "vgrf%d", inst->src[i].nr);
          break;
       case FIXED_GRF:
-         COVPOINT_ASSERT("BrwFs7298"); fprintf(file, "g%d", inst->src[i].nr);
+         COVPOINT("BrwFs7298"); fprintf(file, "g%d", inst->src[i].nr);
          break;
       case MRF:
          fprintf(file, "***m%d***", inst->src[i].nr);
@@ -7340,7 +7340,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
             break;
          case BRW_REGISTER_TYPE_V:
          case BRW_REGISTER_TYPE_UV:
-            COVPOINT_ASSERT("BrwFs7343"); fprintf(file, "%08x%s", inst->src[i].ud,
+            COVPOINT("BrwFs7343"); fprintf(file, "%08x%s", inst->src[i].ud,
                     inst->src[i].type == BRW_REGISTER_TYPE_V ? "V" : "UV");
             break;
          default:
@@ -7349,7 +7349,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
          }
          break;
       case ARF:
-         COVPOINT_ASSERT("BrwFs7352"); switch (inst->src[i].nr) {
+         COVPOINT("BrwFs7352"); switch (inst->src[i].nr) {
          case BRW_ARF_NULL:
             fprintf(file, "null");
             break;
@@ -7383,13 +7383,13 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
       if (inst->src[i].file != IMM) {
          unsigned stride;
          if (inst->src[i].file == ARF || inst->src[i].file == FIXED_GRF) {
-            COVPOINT_ASSERT("BrwFs7386"); unsigned hstride = inst->src[i].hstride;
+            COVPOINT("BrwFs7386"); unsigned hstride = inst->src[i].hstride;
             stride = (hstride == 0 ? 0 : (1 << (hstride - 1)));
          } else {
             stride = inst->src[i].stride;
          }
          if (stride != 1) {
-            COVPOINT_ASSERT("BrwFs7392"); fprintf(file, "<%u>", stride); }
+            COVPOINT("BrwFs7392"); fprintf(file, "<%u>", stride); }
 
          fprintf(file, ":%s", brw_reg_type_to_letters(inst->src[i].type));
       }
@@ -7401,10 +7401,10 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
    fprintf(file, " ");
 
    if (inst->force_writemask_all) {
-      COVPOINT_ASSERT("BrwFs7404"); fprintf(file, "NoMask "); }
+      COVPOINT("BrwFs7404"); fprintf(file, "NoMask "); }
 
    if (inst->exec_size != dispatch_width) {
-      COVPOINT_ASSERT("BrwFs7407"); fprintf(file, "group%d ", inst->group); }
+      COVPOINT("BrwFs7407"); fprintf(file, "group%d ", inst->group); }
 
    fprintf(file, "\n");
 }

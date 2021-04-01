@@ -726,7 +726,7 @@ fs_visitor::try_constant_propagate(fs_inst *inst, acp_entry *entry)
       if (inst->src[i].negate) {
          if ((devinfo->gen >= 8 && is_logic_op(inst->opcode)) ||
              !brw_negate_immediate(val.type, &val.as_brw_reg())) {
-            COVPOINT_ASSERT("BrwFsCopyPropagation729"); continue;
+            COVPOINT("BrwFsCopyPropagation729"); continue;
          }
       }
 

@@ -118,7 +118,7 @@ remove_dead_var_writes(nir_shader *shader, struct set *live)
                 * Flag this deref as dead and remove it.
                 */
                if (parent_modes == 0) {
-                  COVPOINT_ASSERT("NirRemoveDeadVariables121"); deref->modes = 0;
+                  COVPOINT("NirRemoveDeadVariables121"); deref->modes = 0;
                   nir_instr_remove(&deref->instr);
                }
                break;
@@ -131,7 +131,7 @@ remove_dead_var_writes(nir_shader *shader, struct set *live)
                   break;
 
                if (nir_src_as_deref(intrin->src[0])->modes == 0) {
-                  COVPOINT_ASSERT("NirRemoveDeadVariables134"); nir_instr_remove(instr); }
+                  COVPOINT("NirRemoveDeadVariables134"); nir_instr_remove(instr); }
                break;
             }
 

@@ -932,7 +932,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
       else if (left.range == ge_zero || left.range == gt_zero) {
          COVPOINT("NirRangeAnalysis933"); r.range = ge_zero; }
       else if (left.range == le_zero || left.range == lt_zero) {
-         COVPOINT_ASSERT("NirRangeAnalysis935"); r.range = le_zero; }
+         COVPOINT("NirRangeAnalysis935"); r.range = le_zero; }
       else if (left.range == ne_zero) {
          COVPOINT_ASSERT("NirRangeAnalysis937"); r.range = unknown; }
 
