@@ -50,7 +50,7 @@ brw_negate_cmod(enum brw_conditional_mod cmod)
    case BRW_CONDITIONAL_NZ:
       return BRW_CONDITIONAL_Z;
    case BRW_CONDITIONAL_G:
-      return BRW_CONDITIONAL_LE;
+      COVPOINT_ASSERT("BrwEu53"); return BRW_CONDITIONAL_LE;
    case BRW_CONDITIONAL_GE:
       return BRW_CONDITIONAL_L;
    case BRW_CONDITIONAL_L:

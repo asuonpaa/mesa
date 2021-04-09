@@ -858,7 +858,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
       switch (r.range) {
       case le_zero:
       case lt_zero:
-         r.range = eq_zero;
+         COVPOINT_ASSERT("NirRangeAnalysis861"); r.range = eq_zero;
          r.is_integral = true;
          break;
 
@@ -899,8 +899,8 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
          r.range = left.range;
       else if (left.range == ge_zero || left.range == gt_zero)
          r.range = ge_zero;
-      else if (left.range == ne_zero)
-         r.range = unknown;
+      else if (left.range == ne_zero) {
+         COVPOINT_ASSERT("NirRangeAnalysis903"); r.range = unknown; }
 
       break;
    }
@@ -950,7 +950,7 @@ analyze_expression(const nir_alu_instr *instr, unsigned src,
    case nir_op_ult:
    case nir_op_uge:
       /* Boolean results are 0 or -1. */
-      COVPOINT_ASSERT("NirRangeAnalysis953"); r = (struct ssa_result_range){le_zero, false};
+      COVPOINT("NirRangeAnalysis953"); r = (struct ssa_result_range){le_zero, false};
       break;
 
    case nir_op_fpow: {

@@ -332,8 +332,8 @@ try_match_deref(nir_deref_path *base_path, int *path_array_idx,
 
       switch (b->deref_type) {
       case nir_deref_type_var:
-         if (b->var != d->var)
-            return false;
+         if (b->var != d->var) {
+            COVPOINT_ASSERT("NirOptFindArrayCopies336"); return false; }
          continue;
 
       case nir_deref_type_array:
@@ -592,7 +592,7 @@ opt_find_array_copies_block(nir_builder *b, nir_block *block,
 
          if (nir_intrinsic_write_mask(intrin) !=
              (1 << glsl_get_components(dst_deref->type)) - 1) {
-            src_deref = NULL;
+            COVPOINT_ASSERT("NirOptFindArrayCopies595"); src_deref = NULL;
          }
       }
 

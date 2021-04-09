@@ -189,7 +189,7 @@ vtn_handle_matrix_alu(struct vtn_builder *b, SpvOp opcode,
 
    case SpvOpMatrixTimesScalar:
       if (src0->transposed) {
-         return vtn_ssa_transpose(b, mat_times_scalar(b, src0->transposed,
+         COVPOINT_ASSERT("VtnALU192"); return vtn_ssa_transpose(b, mat_times_scalar(b, src0->transposed,
                                                          src1->def));
       } else {
          return mat_times_scalar(b, src0, src1->def);

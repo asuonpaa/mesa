@@ -75,7 +75,7 @@ opt_saturate_propagation_local(const fs_live_variables &live, bblock_t *block)
                break;
 
             if (scan_inst->saturate) {
-               inst->saturate = false;
+               COVPOINT_ASSERT("BrwFsSaturatePropagation78"); inst->saturate = false;
                progress = true;
             } else if (src_end_ip == ip || inst->dst.equals(inst->src[0])) {
                if (scan_inst->can_do_saturate()) {

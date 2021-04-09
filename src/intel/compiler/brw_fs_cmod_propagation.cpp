@@ -169,7 +169,7 @@ static bool
 cmod_propagate_not(const gen_device_info *devinfo, bblock_t *block,
                    fs_inst *inst)
 {
-   const enum brw_conditional_mod cond = brw_negate_cmod(inst->conditional_mod);
+   COVPOINT_ASSERT("BrwFsCmodPropagation172"); const enum brw_conditional_mod cond = brw_negate_cmod(inst->conditional_mod);
    bool read_flag = false;
    const unsigned flags_written = inst->flags_written();
 
@@ -280,7 +280,7 @@ opt_cmod_propagation_local(const gen_device_info *devinfo, bblock_t *block)
       }
 
       if (inst->opcode == BRW_OPCODE_NOT) {
-         progress = cmod_propagate_not(devinfo, block, inst) || progress;
+         COVPOINT_ASSERT("BrwFsCmodPropagation283"); progress = cmod_propagate_not(devinfo, block, inst) || progress;
          continue;
       }
 

@@ -196,7 +196,7 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
    case SHADER_OPCODE_RCP:
       COVPOINT("BrwShader197"); return "rcp";
    case SHADER_OPCODE_RSQ:
-      return "rsq";
+      COVPOINT_ASSERT("BrwShader199"); return "rsq";
    case SHADER_OPCODE_SQRT:
       return "sqrt";
    case SHADER_OPCODE_EXP2:
@@ -362,7 +362,7 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
    case SHADER_OPCODE_GEN7_SCRATCH_READ:
       return "gen7_scratch_read";
    case SHADER_OPCODE_SCRATCH_HEADER:
-      return "scratch_header";
+      COVPOINT_ASSERT("BrwShader365"); return "scratch_header";
    case SHADER_OPCODE_URB_WRITE_SIMD8:
       return "gen8_urb_write_simd8";
    case SHADER_OPCODE_URB_WRITE_SIMD8_PER_SLOT:
@@ -419,11 +419,11 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
       return "set_high_32bit";
 
    case FS_OPCODE_DDX_COARSE:
-      return "ddx_coarse";
+      COVPOINT_ASSERT("BrwShader422"); return "ddx_coarse";
    case FS_OPCODE_DDX_FINE:
       return "ddx_fine";
    case FS_OPCODE_DDY_COARSE:
-      return "ddy_coarse";
+      COVPOINT_ASSERT("BrwShader426"); return "ddy_coarse";
    case FS_OPCODE_DDY_FINE:
       return "ddy_fine";
 
@@ -445,7 +445,7 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
       return "varying_pull_const_logical";
 
    case FS_OPCODE_DISCARD_JUMP:
-      return "discard_jump";
+      COVPOINT_ASSERT("BrwShader448"); return "discard_jump";
 
    case FS_OPCODE_SET_SAMPLE_ID:
       return "set_sample_id";
@@ -562,7 +562,7 @@ brw_saturate_immediate(enum brw_reg_type type, struct brw_reg *reg)
       double df;
    } imm, sat_imm = { 0 };
 
-   const unsigned size = type_sz(type);
+   COVPOINT_ASSERT("BrwShader565"); const unsigned size = type_sz(type);
 
    /* We want to either do a 32-bit or 64-bit data copy, the type is otherwise
     * irrelevant, so just check the size of the type and copy from/to an
@@ -621,7 +621,7 @@ brw_negate_immediate(enum brw_reg_type type, struct brw_reg *reg)
    switch (type) {
    case BRW_REGISTER_TYPE_D:
    case BRW_REGISTER_TYPE_UD:
-      reg->d = -reg->d;
+      COVPOINT_ASSERT("BrwShader624"); reg->d = -reg->d;
       return true;
    case BRW_REGISTER_TYPE_W:
    case BRW_REGISTER_TYPE_UW: {

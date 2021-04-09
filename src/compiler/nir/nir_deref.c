@@ -260,7 +260,7 @@ nir_deref_instr_array_stride(nir_deref_instr *deref)
    case nir_deref_type_cast:
       return deref->cast.ptr_stride;
    default:
-      return 0;
+      COVPOINT_ASSERT("NirDeref263"); return 0;
    }
 }
 

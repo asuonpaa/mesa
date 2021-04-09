@@ -825,7 +825,7 @@ calculate_iterations(nir_const_value initial, nir_const_value step,
       }
    }
 
-   return -1;
+   COVPOINT_ASSERT("NirLoopAnalyze828"); return -1;
 }
 
 static nir_op
@@ -835,7 +835,7 @@ inverse_comparison(nir_op alu_op)
    case nir_op_fge:
       return nir_op_flt;
    case nir_op_ige:
-      return nir_op_ilt;
+      COVPOINT_ASSERT("NirLoopAnalyze838"); return nir_op_ilt;
    case nir_op_uge:
       return nir_op_ult;
    case nir_op_flt:
@@ -860,8 +860,8 @@ inverse_comparison(nir_op alu_op)
 static bool
 is_supported_terminator_condition(nir_ssa_scalar cond)
 {
-   if (!nir_ssa_scalar_is_alu(cond))
-      return false;
+   if (!nir_ssa_scalar_is_alu(cond)) {
+      COVPOINT_ASSERT("NirLoopAnalyze864"); return false; }
 
    nir_alu_instr *alu = nir_instr_as_alu(cond.def->parent_instr);
    return nir_alu_instr_is_comparison(alu) &&
@@ -948,7 +948,7 @@ try_find_trip_count_vars_in_iand(nir_ssa_scalar *cond,
       }
    }
 
-   return found_induction_var;
+   COVPOINT_ASSERT("NirLoopAnalyze951"); return found_induction_var;
 }
 
 /* Run through each of the terminators of the loop and try to infer a possible

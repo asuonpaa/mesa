@@ -2686,7 +2686,7 @@ fs_visitor::opt_algebraic()
 
             if (brw_saturate_immediate(inst->src[0].type,
                                        &inst->src[0].as_brw_reg())) {
-               inst->saturate = false;
+               COVPOINT_ASSERT("BrwFs2689"); inst->saturate = false;
                progress = true;
             }
          }
@@ -2706,7 +2706,7 @@ fs_visitor::opt_algebraic()
 
          /* a * -1.0 = -a */
          if (inst->src[1].is_negative_one()) {
-            inst->opcode = BRW_OPCODE_MOV;
+            COVPOINT_ASSERT("BrwFs2709"); inst->opcode = BRW_OPCODE_MOV;
             inst->src[0].negate = !inst->src[0].negate;
             inst->src[1] = reg_undef;
             progress = true;
@@ -2798,7 +2798,7 @@ fs_visitor::opt_algebraic()
             switch (inst->conditional_mod) {
             case BRW_CONDITIONAL_LE:
             case BRW_CONDITIONAL_L:
-               switch (inst->src[1].type) {
+               COVPOINT_ASSERT("BrwFs2801"); switch (inst->src[1].type) {
                case BRW_REGISTER_TYPE_F:
                   if (inst->src[1].f >= 1.0f) {
                      inst->opcode = BRW_OPCODE_MOV;
@@ -7204,8 +7204,8 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
    }
 
    fprintf(file, "%s", brw_instruction_name(devinfo, inst->opcode));
-   if (inst->saturate)
-      fprintf(file, ".sat");
+   if (inst->saturate) {
+      COVPOINT_ASSERT("BrwFs7208"); fprintf(file, ".sat"); }
    if (inst->conditional_mod) {
       fprintf(file, "%s", conditional_modifier[inst->conditional_mod]);
       if (!inst->predicate &&
@@ -7224,7 +7224,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
    }
 
    if (inst->ex_mlen) {
-      fprintf(file, "(ex_mlen: %d) ", inst->ex_mlen);
+      COVPOINT_ASSERT("BrwFs7227"); fprintf(file, "(ex_mlen: %d) ", inst->ex_mlen);
    }
 
    if (inst->eot) {
@@ -7265,7 +7265,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
          fprintf(file, "f%d.%d", inst->dst.nr & 0xf, inst->dst.subnr);
          break;
       default:
-         fprintf(file, "arf%d.%d", inst->dst.nr & 0xf, inst->dst.subnr);
+         COVPOINT_ASSERT("BrwFs7268"); fprintf(file, "arf%d.%d", inst->dst.nr & 0xf, inst->dst.subnr);
          break;
       }
       break;
@@ -7307,7 +7307,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
          fprintf(file, "u%d", inst->src[i].nr);
          break;
       case BAD_FILE:
-         fprintf(file, "(null)");
+         COVPOINT_ASSERT("BrwFs7310"); fprintf(file, "(null)");
          break;
       case IMM:
          switch (inst->src[i].type) {
@@ -7377,8 +7377,8 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
                  inst->src[i].offset % reg_size);
       }
 
-      if (inst->src[i].abs)
-         fprintf(file, "|");
+      if (inst->src[i].abs) {
+         COVPOINT_ASSERT("BrwFs7381"); fprintf(file, "|"); }
 
       if (inst->src[i].file != IMM) {
          unsigned stride;

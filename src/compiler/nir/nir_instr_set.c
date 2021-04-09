@@ -586,7 +586,7 @@ nir_instrs_equal(const nir_instr *instr1, const nir_instr *instr2)
             return false;
 
          for (unsigned i = 2; i < nir_op_infos[alu1->op].num_inputs; i++) {
-            if (!nir_alu_srcs_equal(alu1, alu2, i, i))
+            COVPOINT_ASSERT("NirInstrSet589"); if (!nir_alu_srcs_equal(alu1, alu2, i, i))
                return false;
          }
       } else {
@@ -603,14 +603,14 @@ nir_instrs_equal(const nir_instr *instr1, const nir_instr *instr2)
 
       if (deref1->deref_type != deref2->deref_type ||
           deref1->modes != deref2->modes ||
-          deref1->type != deref2->type)
-         return false;
+          deref1->type != deref2->type) {
+         COVPOINT_ASSERT("NirInstrSet607"); return false; }
 
       if (deref1->deref_type == nir_deref_type_var)
          return deref1->var == deref2->var;
 
-      if (!nir_srcs_equal(deref1->parent, deref2->parent))
-         return false;
+      if (!nir_srcs_equal(deref1->parent, deref2->parent)) {
+         COVPOINT_ASSERT("NirInstrSet613"); return false; }
 
       switch (deref1->deref_type) {
       case nir_deref_type_struct:
