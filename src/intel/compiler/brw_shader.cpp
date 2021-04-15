@@ -562,7 +562,7 @@ brw_saturate_immediate(enum brw_reg_type type, struct brw_reg *reg)
       double df;
    } imm, sat_imm = { 0 };
 
-   COVPOINT_ASSERT("BrwShader565"); const unsigned size = type_sz(type);
+   COVPOINT("BrwShader565"); const unsigned size = type_sz(type);
 
    /* We want to either do a 32-bit or 64-bit data copy, the type is otherwise
     * irrelevant, so just check the size of the type and copy from/to an
@@ -621,7 +621,7 @@ brw_negate_immediate(enum brw_reg_type type, struct brw_reg *reg)
    switch (type) {
    case BRW_REGISTER_TYPE_D:
    case BRW_REGISTER_TYPE_UD:
-      COVPOINT_ASSERT("BrwShader624"); reg->d = -reg->d;
+      COVPOINT("BrwShader624"); reg->d = -reg->d;
       return true;
    case BRW_REGISTER_TYPE_W:
    case BRW_REGISTER_TYPE_UW: {

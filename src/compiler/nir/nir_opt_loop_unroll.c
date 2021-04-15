@@ -80,7 +80,7 @@ get_first_blocks_in_terminator(nir_loop_terminator *term,
                                nir_block **first_continue_block)
 {
    if (term->continue_from_then) {
-      COVPOINT_ASSERT("NirOptLoopUnroll83"); *first_continue_block = nir_if_first_then_block(term->nif);
+      COVPOINT("NirOptLoopUnroll83"); *first_continue_block = nir_if_first_then_block(term->nif);
       *first_break_block = nir_if_first_else_block(term->nif);
    } else {
       *first_continue_block = nir_if_first_else_block(term->nif);

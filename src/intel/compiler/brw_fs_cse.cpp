@@ -152,7 +152,7 @@ operands_match(const fs_inst *a, const fs_inst *b, bool *negate)
 
       *negate = (xs0_negate != xs1_negate) != (ys0_negate != ys1_negate);
       if (*negate && (a->saturate || b->saturate)) {
-         COVPOINT_ASSERT("BrwFsCse155"); return false; }
+         COVPOINT("BrwFsCse155"); return false; }
       return ret;
    } else if (!a->is_commutative()) {
       bool match = true;

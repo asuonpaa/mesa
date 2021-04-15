@@ -2798,7 +2798,7 @@ fs_visitor::opt_algebraic()
             switch (inst->conditional_mod) {
             case BRW_CONDITIONAL_LE:
             case BRW_CONDITIONAL_L:
-               COVPOINT_ASSERT("BrwFs2801"); switch (inst->src[1].type) {
+               COVPOINT("BrwFs2801"); switch (inst->src[1].type) {
                case BRW_REGISTER_TYPE_F:
                   if (inst->src[1].f >= 1.0f) {
                      inst->opcode = BRW_OPCODE_MOV;

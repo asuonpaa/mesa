@@ -1196,7 +1196,7 @@ get_non_self_referential_store_comps(nir_intrinsic_instr *store)
        * channels that don't move in the swizzle.
        */
       if (src_is_load_deref(src_alu->src[0].src, store->src[0])) {
-         COVPOINT_ASSERT("NirSplitVars1199"); for (unsigned i = 0; i < NIR_MAX_VEC_COMPONENTS; i++) {
+         COVPOINT("NirSplitVars1199"); for (unsigned i = 0; i < NIR_MAX_VEC_COMPONENTS; i++) {
             if (src_alu->src[0].swizzle[i] == i)
                comps &= ~(1u << i);
          }

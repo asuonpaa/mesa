@@ -217,7 +217,7 @@ is_not_fmul(struct hash_table *ht, nir_alu_instr *instr, unsigned src,
       nir_src_as_alu_instr(instr->src[src].src);
 
    if (src_alu == NULL) {
-      COVPOINT_ASSERT("NirSearchHelpersH220"); return true; }
+      COVPOINT("NirSearchHelpersH220"); return true; }
 
    if (src_alu->op == nir_op_fneg)
       return is_not_fmul(ht, src_alu, 0, 0, NULL);
