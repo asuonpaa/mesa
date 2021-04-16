@@ -7289,7 +7289,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
       if (inst->src[i].negate)
          fprintf(file, "-");
       if (inst->src[i].abs) {
-         COVPOINT_ASSERT("BrwFs7292"); fprintf(file, "|"); }
+         COVPOINT("BrwFs7292"); fprintf(file, "|"); }
       switch (inst->src[i].file) {
       case VGRF:
          fprintf(file, "vgrf%d", inst->src[i].nr);
@@ -7378,7 +7378,7 @@ fs_visitor::dump_instruction(const backend_instruction *be_inst, FILE *file) con
       }
 
       if (inst->src[i].abs) {
-         COVPOINT_ASSERT("BrwFs7381"); fprintf(file, "|"); }
+         COVPOINT("BrwFs7381"); fprintf(file, "|"); }
 
       if (inst->src[i].file != IMM) {
          unsigned stride;

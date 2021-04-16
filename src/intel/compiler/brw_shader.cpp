@@ -419,11 +419,11 @@ brw_instruction_name(const struct gen_device_info *devinfo, enum opcode op)
       return "set_high_32bit";
 
    case FS_OPCODE_DDX_COARSE:
-      COVPOINT_ASSERT("BrwShader422"); return "ddx_coarse";
+      COVPOINT("BrwShader422"); return "ddx_coarse";
    case FS_OPCODE_DDX_FINE:
       return "ddx_fine";
    case FS_OPCODE_DDY_COARSE:
-      COVPOINT_ASSERT("BrwShader426"); return "ddy_coarse";
+      COVPOINT("BrwShader426"); return "ddy_coarse";
    case FS_OPCODE_DDY_FINE:
       return "ddy_fine";
 
