@@ -246,7 +246,7 @@ convert_loop_exit_for_ssa(nir_ssa_def *def, void *void_state)
 
    /* deref instructions need a cast after the phi */
    if (def->parent_instr->type == nir_instr_type_deref) {
-      nir_deref_instr *cast =
+      COVPOINT_ASSERT("NirToLCSSA249"); nir_deref_instr *cast =
          nir_deref_instr_create(state->shader, nir_deref_type_cast);
 
       nir_deref_instr *instr = nir_instr_as_deref(def->parent_instr);

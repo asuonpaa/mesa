@@ -556,8 +556,8 @@ lower_load_vulkan_descriptor(nir_intrinsic_instr *intrin,
 
    assert(intrin->dest.is_ssa);
    nir_foreach_use(src, &intrin->dest.ssa) {
-      if (src->parent_instr->type != nir_instr_type_deref)
-         continue;
+      if (src->parent_instr->type != nir_instr_type_deref) {
+         COVPOINT_ASSERT("AnvNirApplyPipelineLayout560"); continue; }
 
       nir_deref_instr *cast = nir_instr_as_deref(src->parent_instr);
       assert(cast->deref_type == nir_deref_type_cast);

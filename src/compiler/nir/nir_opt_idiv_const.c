@@ -53,7 +53,7 @@ static nir_ssa_def *
 build_umod(nir_builder *b, nir_ssa_def *n, uint64_t d)
 {
    if (d == 0) {
-      return nir_imm_intN_t(b, 0, n->bit_size);
+      COVPOINT_ASSERT("NirOptIdivConst56"); return nir_imm_intN_t(b, 0, n->bit_size);
    } else if (util_is_power_of_two_or_zero64(d)) {
       return nir_iand(b, n, nir_imm_intN_t(b, d - 1, n->bit_size));
    } else {
