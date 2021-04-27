@@ -2706,7 +2706,7 @@ fs_visitor::opt_algebraic()
 
          /* a * -1.0 = -a */
          if (inst->src[1].is_negative_one()) {
-            COVPOINT_ASSERT("BrwFs2709"); inst->opcode = BRW_OPCODE_MOV;
+            COVPOINT("BrwFs2709"); inst->opcode = BRW_OPCODE_MOV;
             inst->src[0].negate = !inst->src[0].negate;
             inst->src[1] = reg_undef;
             progress = true;
@@ -2836,7 +2836,7 @@ fs_visitor::opt_algebraic()
              inst->src[2].type != BRW_REGISTER_TYPE_F)
             break;
          if (inst->src[1].is_one()) {
-            COVPOINT_ASSERT("BrwFs2839"); inst->opcode = BRW_OPCODE_ADD;
+            COVPOINT("BrwFs2839"); inst->opcode = BRW_OPCODE_ADD;
             inst->src[1] = inst->src[2];
             inst->src[2] = reg_undef;
             progress = true;

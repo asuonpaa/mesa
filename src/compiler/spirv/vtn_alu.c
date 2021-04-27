@@ -87,7 +87,7 @@ matrix_multiply(struct vtn_builder *b,
    bool transpose_result = false;
    if (src0_transpose && src1_transpose) {
       /* transpose(A) * transpose(B) = transpose(B * A) */
-      COVPOINT_ASSERT("VtnALU90"); src1 = src0_transpose;
+      COVPOINT("VtnALU90"); src1 = src0_transpose;
       src0 = src1_transpose;
       src0_transpose = NULL;
       src1_transpose = NULL;

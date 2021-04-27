@@ -174,7 +174,7 @@ cmod_propagate_not(const gen_device_info *devinfo, bblock_t *block,
    const unsigned flags_written = inst->flags_written();
 
    if (cond != BRW_CONDITIONAL_Z && cond != BRW_CONDITIONAL_NZ) {
-      COVPOINT_ASSERT("BrwFsCmodPropagation177"); return false; }
+      COVPOINT("BrwFsCmodPropagation177"); return false; }
 
    foreach_inst_in_block_reverse_starting_from(fs_inst, scan_inst, inst) {
       if (regions_overlap(scan_inst->dst, scan_inst->size_written,
