@@ -1049,7 +1049,7 @@ copy_prop_vars_block(struct copy_prop_var_state *state,
 
          if (nir_compare_derefs(src, dst) & nir_derefs_equal_bit) {
             /* This is a no-op self-copy.  Get rid of it */
-            nir_instr_remove(instr);
+            COVPOINT_ASSERT("NirOptCopyPropVars1052"); nir_instr_remove(instr);
             state->progress = true;
             continue;
          }
@@ -1072,8 +1072,8 @@ copy_prop_vars_block(struct copy_prop_var_state *state,
                nir_store_deref(b, dst, value.ssa.def[0], full_mask);
             } else {
                /* If this would be a no-op self-copy, don't bother. */
-               if (nir_compare_derefs(value.deref, dst) & nir_derefs_equal_bit)
-                  continue;
+               if (nir_compare_derefs(value.deref, dst) & nir_derefs_equal_bit) {
+                  COVPOINT_ASSERT("NirOptCopyPropVars1076"); continue; }
 
                /* Just turn it into a copy of a different deref */
                intrin->src[1] = nir_src_for_ssa(&value.deref->dest.ssa);

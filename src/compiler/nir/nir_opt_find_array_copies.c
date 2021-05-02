@@ -123,7 +123,7 @@ node_for_deref(nir_deref_instr *instr, struct match_node *parent,
          idx = nir_src_as_uint(instr->arr.index);
          assert(idx < parent->num_children - 1);
       } else {
-         idx = parent->num_children - 1;
+         COVPOINT_ASSERT("NirOptFindArrayCopies126"); idx = parent->num_children - 1;
       }
       break;
 

@@ -1219,8 +1219,8 @@ glsl_type::record_compare(const glsl_type *b, bool match_name,
 
    for (unsigned i = 0; i < this->length; i++) {
       if (match_precision) {
-         if (this->fields.structure[i].type != b->fields.structure[i].type)
-            return false;
+         if (this->fields.structure[i].type != b->fields.structure[i].type) {
+            COVPOINT_ASSERT("GlslTypes1223"); return false; }
       } else {
          const glsl_type *ta = this->fields.structure[i].type;
          const glsl_type *tb = b->fields.structure[i].type;

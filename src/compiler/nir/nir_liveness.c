@@ -237,8 +237,8 @@ search_for_use_after_instr(nir_instr *start, nir_ssa_def *def)
     */
    nir_if *following_if = nir_block_get_following_if(start->block);
    if (following_if && following_if->condition.is_ssa &&
-       following_if->condition.ssa == def)
-      return true;
+       following_if->condition.ssa == def) {
+      COVPOINT_ASSERT("NirLiveness241"); return true; }
 
    return false;
 }
